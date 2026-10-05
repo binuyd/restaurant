@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut, User as UserIcon } from 'lucide-react';
+import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 

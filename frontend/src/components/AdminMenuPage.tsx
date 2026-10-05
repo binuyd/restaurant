@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, CheckCircle2, XCircle, Search } from 'lucide-react';
-import { MenuItem, Category } from '../types';
+import type { MenuItem, Category } from '../types';
 import { api } from '../api/client';
 
 export const AdminMenuPage: React.FC = () => {

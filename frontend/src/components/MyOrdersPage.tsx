@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw, Clock, XCircle, CheckCircle2, AlertCircle, ChevronDown, ChevronUp, History } from 'lucide-react';
-import { OrderDto, OrderStatus } from '../types';
+import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 
 export const MyOrdersPage: React.FC = () => {

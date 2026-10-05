@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DollarSign, ShoppingBag, TrendingUp, Trophy, PieChart as PieIcon, BarChart2 } from 'lucide-react';
-import { DashboardSummaryDto } from '../types';
+import type { DashboardSummaryDto } from '../types';
 import { api } from '../api/client';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
 
@@ -124,7 +124,7 @@ export const AdminDashboardPage: React.FC = () => {
                   paddingAngle={5}
                   dataKey="count"
                 >
-                  {statusChartData.map((entry, index) => (
+                  {statusChartData.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>

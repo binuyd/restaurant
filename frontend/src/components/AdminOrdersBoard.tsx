@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, AlertTriangle, RefreshCw, ShieldAlert, CheckCircle } from 'lucide-react';
-import { OrderDto, OrderStatus } from '../types';
+import { ArrowRight, RefreshCw, ShieldAlert } from 'lucide-react';
+import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 
 export const AdminOrdersBoard: React.FC = () => {

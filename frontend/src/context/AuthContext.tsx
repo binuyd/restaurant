@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, AuthResponse } from '../types';
+import React, { createContext, useContext, useState } from 'react';
+import type { User, AuthResponse } from '../types';
 import { api } from '../api/client';
 
 interface AuthContextType {
@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     saveAuthSession(res.data);
   };
 
-  const register = async (name: string, email: string, password: string, role = 'CUSTOMER' as const) => {
+  const register = async (name: string, email: string, password: string, role: 'CUSTOMER' | 'ADMIN' = 'CUSTOMER') => {
     const res = await api.post<AuthResponse>('/auth/register', { name, email, password, role });
     saveAuthSession(res.data);
   };

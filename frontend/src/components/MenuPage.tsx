@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Minus, Check, Flame, Star } from 'lucide-react';
-import { MenuItem, Category } from '../types';
+import { Search, Plus, Minus, Check, Flame } from 'lucide-react';
+import type { MenuItem, Category } from '../types';
 import { api } from '../api/client';
 import { useCart } from '../context/CartContext';
 
