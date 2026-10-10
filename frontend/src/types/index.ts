@@ -2,6 +2,10 @@ export type Role = 'CUSTOMER' | 'ADMIN';
 
 export type OrderStatus = 'PLACED' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'COMPLETED' | 'CANCELLED';
 
+export type OrderType = 'DINE_IN' | 'TAKEAWAY' | 'DELIVERY';
+
+export type ReservationStatus = 'PENDING' | 'CONFIRMED' | 'SEATED' | 'COMPLETED' | 'CANCELLED';
+
 export interface User {
   id: number;
   name: string;
@@ -59,12 +63,62 @@ export interface OrderDto {
   customerName: string;
   customerEmail: string;
   status: OrderStatus;
+  orderType: OrderType;
+  tableNumber?: string;
+  customerPhone?: string;
+  deliveryAddress?: string;
+  specialNotes?: string;
   totalAmount: number;
   version: number;
   createdAt: string;
   updatedAt: string;
   items: OrderItemDto[];
   statusHistory: OrderStatusHistoryDto[];
+}
+
+export interface ReservationDto {
+  id: number;
+  userId?: number;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  reservationDate: string;
+  reservationTime: string;
+  partySize: number;
+  seatingArea: string;
+  specialOccasion: string;
+  specialRequests?: string;
+  status: ReservationStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateReservationRequest {
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  reservationDate: string;
+  reservationTime: string;
+  partySize: number;
+  seatingArea?: string;
+  specialOccasion?: string;
+  specialRequests?: string;
+}
+
+export interface ReviewDto {
+  id: number;
+  menuItemId: number;
+  menuItemName: string;
+  customerName: string;
+  rating: number;
+  comment?: string;
+  createdAt: string;
+}
+
+export interface MenuItemRatingSummaryDto {
+  menuItemId: number;
+  averageRating: number;
+  totalReviews: number;
 }
 
 export interface TopSellingItemDto {

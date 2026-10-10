@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { RefreshCw, Clock, XCircle, CheckCircle2, AlertCircle, ChevronDown, ChevronUp, History } from 'lucide-react';
+import { RefreshCw, Clock, XCircle, CheckCircle2, AlertCircle, ChevronDown, ChevronUp, History, Printer } from 'lucide-react';
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
+import { OrderReceiptModal } from './OrderReceiptModal';
 
 export const MyOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);
@@ -9,6 +10,7 @@ export const MyOrdersPage: React.FC = () => {
   const [expandedOrder, setExpandedOrder] = useState<number | null>(null);
   const [cancelLoading, setCancelLoading] = useState<number | null>(null);
   const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
+  const [receiptOrder, setReceiptOrder] = useState<OrderDto | null>(null);
 
   const fetchMyOrders = async (silent = false) => {
     if (!silent) setLoading(true);
@@ -23,7 +25,6 @@ export const MyOrdersPage: React.FC = () => {
     }
   };
 
-  // 10-second Polling for Live Order Status Updates (per Section 5 of Spec)
   useEffect(() => {
     fetchMyOrders();
     const interval = setInterval(() => {
@@ -62,9 +63,9 @@ export const MyOrdersPage: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-100">My Orders History</h1>
+          <h1 className="text-3xl font-bold text-slate-100">My Orders & Live Status</h1>
           <p className="text-sm text-slate-400 mt-1">
-            Track your order lifecycle in real-time. (Auto-refreshes every 10s)
+            Track dining orders from kitchen prep to table serving. (Auto-refreshes every 10s)
           </p>
         </div>
 
@@ -77,7 +78,7 @@ export const MyOrdersPage: React.FC = () => {
         </button>
       </div>
 
-      {loading ? (
+      {loading && orders.length === 0 ? (
         <div className="flex justify-center items-center py-20">
           <div className="spinner"></div>
         </div>
@@ -105,13 +106,39 @@ export const MyOrdersPage: React.FC = () => {
                       <span className={`status-pill ${order.status.toLowerCase()}`}>
                         {order.status}
                       </span>
+                      <span className="px-2 py-0.5 rounded bg-slate-800 text-[11px] font-bold text-amber-400">
+                        {order.orderType === 'DINE_IN'
+                          ? `🍽️ ${order.tableNumber || 'Dine-In'}`
+                          : order.orderType === 'TAKEAWAY'
+                          ? '🛍️ Takeaway'
+                          : '🛵 Delivery'}
+                      </span>
                     </div>
                     <p className="text-xs text-slate-400 mt-1">
                       Placed on {new Date(order.createdAt).toLocaleString()}
                     </p>
+                    {order.deliveryAddress && (
+                      <p className="text-xs text-slate-300 mt-0.5">
+                        📍 Deliver to: {order.deliveryAddress}
+                      </p>
+                    )}
+                    {order.specialNotes && (
+                      <p className="text-xs text-amber-300/90 mt-0.5">
+                        📝 Instructions: {order.specialNotes}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setReceiptOrder(order)}
+                      className="btn-secondary text-xs flex items-center gap-1.5"
+                      title="Print or view bill"
+                    >
+                      <Printer className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Receipt / Bill</span>
+                    </button>
+
                     <div className="text-right">
                       <span className="text-xs text-slate-400 block">Total Amount</span>
                       <span className="text-xl font-bold text-amber-400">
@@ -126,13 +153,13 @@ export const MyOrdersPage: React.FC = () => {
                         className="btn-cancel text-xs"
                       >
                         <XCircle className="w-3.5 h-3.5 mr-1 inline" />
-                        {cancelLoading === order.id ? 'Cancelling...' : 'Cancel Order'}
+                        {cancelLoading === order.id ? 'Cancelling...' : 'Cancel'}
                       </button>
                     )}
                   </div>
                 </div>
 
-                {/* Progress Bar State Machine Diagram */}
+                {/* Progress Bar */}
                 {!isCancelled ? (
                   <div className="progress-bar-container">
                     <div className="progress-track">
@@ -177,10 +204,10 @@ export const MyOrdersPage: React.FC = () => {
                   </div>
                 )}
 
-                {/* Item List & Snapshot Verification */}
+                {/* Item List */}
                 <div className="order-items-preview">
                   <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-                    Order Items (Unit Price Snapshot)
+                    Order Items Breakdown
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {order.items.map((item) => (
@@ -236,6 +263,13 @@ export const MyOrdersPage: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Order Receipt Modal */}
+      <OrderReceiptModal
+        order={receiptOrder}
+        isOpen={!!receiptOrder}
+        onClose={() => setReceiptOrder(null)}
+      />
     </div>
   );
 };

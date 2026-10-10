@@ -1305,3 +1305,71 @@ select.input-field option {
     margin: auto 0;
   }
 }
+
+/* Receipt Modal & Official Print Styling */
+.receipt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-color: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.receipt-modal-wrapper {
+  max-width: 440px;
+  width: 100%;
+  margin: auto;
+}
+
+.receipt-actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.printable-receipt {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.receipt-divider {
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.receipt-items-table th,
+.receipt-items-table td {
+  padding: 0.35rem 0.2rem;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt-card, #printable-receipt-card * {
+    visibility: visible;
+  }
+  #printable-receipt-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 1.5cm;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .receipt-actions-bar {
+    display: none !important;
+  }
+}
+

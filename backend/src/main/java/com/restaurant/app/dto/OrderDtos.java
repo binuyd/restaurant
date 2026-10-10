@@ -37,6 +37,12 @@ public class OrderDtos {
         @NotEmpty(message = "Order must contain at least one item")
         @Valid
         private List<OrderItemRequest> items;
+
+        private com.restaurant.app.domain.enums.OrderType orderType;
+        private String tableNumber;
+        private String customerPhone;
+        private String deliveryAddress;
+        private String specialNotes;
     }
 
     @Data
@@ -74,6 +80,11 @@ public class OrderDtos {
         private String customerName;
         private String customerEmail;
         private OrderStatus status;
+        private com.restaurant.app.domain.enums.OrderType orderType;
+        private String tableNumber;
+        private String customerPhone;
+        private String deliveryAddress;
+        private String specialNotes;
         private BigDecimal totalAmount;
         private Long version;
         private LocalDateTime createdAt;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut, X } from 'lucide-react';
+import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut, X, Calendar, ChefHat, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
@@ -50,8 +50,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
             onClick={() => navigate('menu')}
             className={`nav-btn ${currentTab === 'menu' ? 'active' : ''}`}
           >
-            <MenuIcon className="w-4 h-4 mr-2 inline" />
+            <MenuIcon className="w-4 h-4 mr-1.5 inline" />
             Menu
+          </button>
+
+          <button
+            onClick={() => navigate('reservations')}
+            className={`nav-btn ${currentTab === 'reservations' ? 'active' : ''}`}
+          >
+            <Calendar className="w-4 h-4 mr-1.5 inline text-amber-400" />
+            Book Table
           </button>
 
           {isAuthenticated && (
@@ -59,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
               onClick={() => navigate('my-orders')}
               className={`nav-btn ${currentTab === 'my-orders' ? 'active' : ''}`}
             >
-              <ListOrdered className="w-4 h-4 mr-2 inline" />
+              <ListOrdered className="w-4 h-4 mr-1.5 inline" />
               My Orders
             </button>
           )}
@@ -67,25 +75,39 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
           {isAdmin && (
             <>
               <button
+                onClick={() => navigate('kitchen-kds')}
+                className={`nav-btn admin ${currentTab === 'kitchen-kds' ? 'active' : ''}`}
+              >
+                <ChefHat className="w-4 h-4 mr-1.5 inline text-amber-400" />
+                Kitchen KDS
+              </button>
+              <button
                 onClick={() => navigate('admin-orders')}
                 className={`nav-btn admin ${currentTab === 'admin-orders' ? 'active' : ''}`}
               >
-                <ListOrdered className="w-4 h-4 mr-2 inline" />
+                <ListOrdered className="w-4 h-4 mr-1.5 inline" />
                 Orders Board
+              </button>
+              <button
+                onClick={() => navigate('admin-reservations')}
+                className={`nav-btn admin ${currentTab === 'admin-reservations' ? 'active' : ''}`}
+              >
+                <Users className="w-4 h-4 mr-1.5 inline" />
+                Reservations
               </button>
               <button
                 onClick={() => navigate('admin-menu')}
                 className={`nav-btn admin ${currentTab === 'admin-menu' ? 'active' : ''}`}
               >
-                <MenuIcon className="w-4 h-4 mr-2 inline" />
-                Menu Management
+                <MenuIcon className="w-4 h-4 mr-1.5 inline" />
+                Menu Admin
               </button>
               <button
                 onClick={() => navigate('admin-dashboard')}
                 className={`nav-btn admin ${currentTab === 'admin-dashboard' ? 'active' : ''}`}
               >
-                <LayoutDashboard className="w-4 h-4 mr-2 inline" />
-                Dashboard
+                <LayoutDashboard className="w-4 h-4 mr-1.5 inline" />
+                Analytics
               </button>
             </>
           )}
@@ -118,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
           ) : (
             <button onClick={onOpenAuth} className="btn-primary flex items-center gap-2">
               <LogIn className="w-4 h-4" />
-              <span>Sign In</span>
+              <span>Sign In / Demo</span>
             </button>
           )}
         </div>

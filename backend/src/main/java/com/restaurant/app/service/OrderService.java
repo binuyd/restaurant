@@ -44,9 +44,18 @@ public class OrderService {
         Map<Long, MenuItem> menuItemMap = menuItemRepository.findAllById(menuItemIds).stream()
                 .collect(Collectors.toMap(MenuItem::getId, item -> item));
 
+        com.restaurant.app.domain.enums.OrderType type = request.getOrderType() != null 
+                ? request.getOrderType() 
+                : com.restaurant.app.domain.enums.OrderType.DINE_IN;
+
         Order order = Order.builder()
                 .user(user)
                 .status(OrderStatus.PLACED)
+                .orderType(type)
+                .tableNumber(request.getTableNumber())
+                .customerPhone(request.getCustomerPhone())
+                .deliveryAddress(request.getDeliveryAddress())
+                .specialNotes(request.getSpecialNotes())
                 .totalAmount(BigDecimal.ZERO)
                 .build();
 
@@ -195,6 +204,11 @@ public class OrderService {
                 .customerName(order.getUser().getName())
                 .customerEmail(order.getUser().getEmail())
                 .status(order.getStatus())
+                .orderType(order.getOrderType())
+                .tableNumber(order.getTableNumber())
+                .customerPhone(order.getCustomerPhone())
+                .deliveryAddress(order.getDeliveryAddress())
+                .specialNotes(order.getSpecialNotes())
                 .totalAmount(order.getTotalAmount())
                 .version(order.getVersion())
                 .createdAt(order.getCreatedAt())

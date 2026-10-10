@@ -6,7 +6,10 @@ import { MenuPage } from './components/MenuPage';
 import { CartDrawer } from './components/CartDrawer';
 import { AuthModal } from './components/AuthModal';
 import { MyOrdersPage } from './components/MyOrdersPage';
+import { ReservationPage } from './components/ReservationPage';
+import { KitchenKdsPage } from './components/KitchenKdsPage';
 import { AdminOrdersBoard } from './components/AdminOrdersBoard';
+import { AdminReservationsPage } from './components/AdminReservationsPage';
 import { AdminMenuPage } from './components/AdminMenuPage';
 import { AdminDashboardPage } from './components/AdminDashboardPage';
 
@@ -31,9 +34,14 @@ const MainContent: React.FC = () => {
       />
 
       <main className="flex-1">
-        {currentTab === 'menu' && <MenuPage />}
+        {currentTab === 'menu' && (
+          <MenuPage onNavigateToReservation={() => setCurrentTab('reservations')} />
+        )}
+        {currentTab === 'reservations' && <ReservationPage />}
         {currentTab === 'my-orders' && isAuthenticated && <MyOrdersPage />}
+        {currentTab === 'kitchen-kds' && isAdmin && <KitchenKdsPage />}
         {currentTab === 'admin-orders' && isAdmin && <AdminOrdersBoard />}
+        {currentTab === 'admin-reservations' && isAdmin && <AdminReservationsPage />}
         {currentTab === 'admin-menu' && isAdmin && <AdminMenuPage />}
         {currentTab === 'admin-dashboard' && isAdmin && <AdminDashboardPage />}
       </main>
@@ -41,13 +49,15 @@ const MainContent: React.FC = () => {
       {/* Footer */}
       <footer className="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 bg-slate-950/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 Gourmet Haven Restaurant Ordering Platform. All rights reserved.</p>
+          <p>© 2026 Gourmet Haven Full Restaurant Management Platform. All rights reserved.</p>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>Spring Boot 3.3</span>
+            <span>Spring Boot 3.3 REST</span>
             <span>•</span>
             <span>React + TypeScript</span>
             <span>•</span>
-            <span>PostgreSQL & Flyway</span>
+            <span>KDS & Table Reservations</span>
+            <span>•</span>
+            <span>In-Person Settlement</span>
           </div>
         </div>
       </footer>

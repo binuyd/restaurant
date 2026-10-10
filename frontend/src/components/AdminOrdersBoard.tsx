@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, RefreshCw, ShieldAlert } from 'lucide-react';
+import { ArrowRight, RefreshCw, ShieldAlert, Printer } from 'lucide-react';
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
+import { OrderReceiptModal } from './OrderReceiptModal';
 
 export const AdminOrdersBoard: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [receiptOrder, setReceiptOrder] = useState<OrderDto | null>(null);
 
   const statuses: OrderStatus[] = ['PLACED', 'CONFIRMED', 'PREPARING', 'READY', 'COMPLETED', 'CANCELLED'];
 
@@ -54,7 +56,7 @@ export const AdminOrdersBoard: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-100">Admin Orders Board</h1>
+          <h1 className="text-3xl font-bold text-slate-100">Admin Orders Kanban Board</h1>
           <p className="text-sm text-slate-400 mt-1">
             Enforce validated order lifecycle transitions & optimistic locking.
           </p>
@@ -77,7 +79,7 @@ export const AdminOrdersBoard: React.FC = () => {
         </div>
       )}
 
-      {loading ? (
+      {loading && orders.length === 0 ? (
         <div className="flex justify-center items-center py-20">
           <div className="spinner"></div>
         </div>
@@ -103,19 +105,45 @@ export const AdminOrdersBoard: React.FC = () => {
 
                       return (
                         <div key={order.id} className="kanban-card">
-                          <div className="flex justify-between items-start mb-2">
+                          <div className="flex justify-between items-start mb-1.5">
                             <span className="font-bold text-slate-200 text-sm">#{order.id}</span>
-                            <span className="version-pill" title="Optimistic Lock Version">
-                              v{order.version}
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                onClick={() => setReceiptOrder(order)}
+                                className="text-slate-400 hover:text-amber-400 p-1"
+                                title="Print Receipt / Bill"
+                              >
+                                <Printer className="w-3.5 h-3.5" />
+                              </button>
+                              <span className="version-pill" title="Optimistic Lock Version">
+                                v{order.version}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Order Mode Badge */}
+                          <div className="mb-2">
+                            <span className="inline-block px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-amber-400 uppercase">
+                              {order.orderType === 'DINE_IN'
+                                ? `🍽️ ${order.tableNumber || 'Dine-In'}`
+                                : order.orderType === 'TAKEAWAY'
+                                ? '🛍️ Takeaway'
+                                : '🛵 Delivery'}
                             </span>
                           </div>
 
-                          <div className="text-xs text-slate-300 font-semibold mb-1">
+                          <div className="text-xs text-slate-300 font-semibold mb-0.5">
                             {order.customerName}
                           </div>
-                          <div className="text-[11px] text-slate-400 mb-3 truncate">
+                          <div className="text-[11px] text-slate-400 mb-2 truncate">
                             {order.customerEmail}
                           </div>
+
+                          {order.specialNotes && (
+                            <div className="mb-2 p-1.5 rounded bg-amber-500/10 text-[10px] text-amber-300 border border-amber-500/20">
+                              <span className="font-semibold">Note:</span> {order.specialNotes}
+                            </div>
+                          )}
 
                           <div className="border-t border-slate-700/50 pt-2 mb-3 space-y-1">
                             {order.items.map((item) => (
@@ -146,9 +174,10 @@ export const AdminOrdersBoard: React.FC = () => {
                                 <button
                                   onClick={() => handleStatusUpdate(order.id, next)}
                                   className="btn-kanban-next"
+                                  title={`Advance to ${next}`}
                                 >
                                   <span>{next}</span>
-                                  <ArrowRight className="w-3 h-3 ml-1 inline" />
+                                  <ArrowRight className="w-3 h-3" />
                                 </button>
                               )}
                             </div>
@@ -163,6 +192,13 @@ export const AdminOrdersBoard: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Receipt Modal */}
+      <OrderReceiptModal
+        order={receiptOrder}
+        isOpen={!!receiptOrder}
+        onClose={() => setReceiptOrder(null)}
+      />
     </div>
   );
 };

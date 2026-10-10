@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Minus, Check, Flame } from 'lucide-react';
-import type { MenuItem, Category } from '../types';
+import { Search, Plus, Minus, Check, Flame, Star, Calendar, MessageSquare } from 'lucide-react';
+import type { MenuItem, Category, MenuItemRatingSummaryDto } from '../types';
 import { api } from '../api/client';
 import { useCart } from '../context/CartContext';
+import { DishDetailsModal } from './DishDetailsModal';
 
-export const MenuPage: React.FC = () => {
+interface MenuPageProps {
+  onNavigateToReservation?: () => void;
+}
+
+export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [ratingsMap, setRatingsMap] = useState<Record<number, { avg: number; count: number }>>({});
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [addedNotice, setAddedNotice] = useState<number | null>(null);
+  const [detailsItem, setDetailsItem] = useState<MenuItem | null>(null);
 
   const { addToCart } = useCart();
 
   useEffect(() => {
     fetchCategories();
+    fetchRatingSummaries();
+  }, []);
+
+  useEffect(() => {
     fetchMenu();
   }, [selectedCategory]);
 
@@ -27,6 +38,19 @@ export const MenuPage: React.FC = () => {
       setCategories(res.data);
     } catch (err) {
       console.error('Failed to load categories', err);
+    }
+  };
+
+  const fetchRatingSummaries = async () => {
+    try {
+      const res = await api.get<MenuItemRatingSummaryDto[]>('/reviews/summaries');
+      const map: Record<number, { avg: number; count: number }> = {};
+      res.data.forEach((r) => {
+        map[r.menuItemId] = { avg: r.averageRating, count: r.totalReviews };
+      });
+      setRatingsMap(map);
+    } catch (err) {
+      console.error('Failed to load rating summaries', err);
     }
   };
 
@@ -74,19 +98,36 @@ export const MenuPage: React.FC = () => {
       <div className="hero-banner">
         <div className="hero-badge">
           <Flame className="w-4 h-4 text-amber-400" />
-          <span>Artisanal Culinary Craftsmanship</span>
+          <span>Artisanal Culinary Craftsmanship • Zero Online Payment Required</span>
         </div>
         <h1 className="hero-title">Experience Exquisite Dining</h1>
         <p className="hero-subtitle">
           Handcrafted dishes prepared with fresh organic ingredients, traditional recipes, and contemporary passion.
+          Order for dine-in table service, takeaway, or direct delivery.
         </p>
+
+        {/* Quick CTA Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3 my-4">
+          {onNavigateToReservation && (
+            <button
+              onClick={onNavigateToReservation}
+              className="btn-primary py-2.5 px-5 text-xs font-semibold flex items-center gap-2"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Book a Table (Instant Confirmation)</span>
+            </button>
+          )}
+          <div className="text-xs text-slate-400 bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-800">
+            Open daily: 12:00 PM – 11:00 PM • Cash & In-Person Checkout
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="search-box">
           <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
           <input
             type="text"
-            placeholder="Search our gourmet menu items..."
+            placeholder="Search appetizers, chef mains, woodfired pizzas, desserts..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
@@ -100,7 +141,7 @@ export const MenuPage: React.FC = () => {
           onClick={() => setSelectedCategory(null)}
           className={`pill-btn ${selectedCategory === null ? 'active' : ''}`}
         >
-          All Items
+          All Items ({menuItems.length})
         </button>
         {categories.map((cat) => (
           <button
@@ -132,14 +173,18 @@ export const MenuPage: React.FC = () => {
           {filteredItems.map((item) => {
             const qty = quantities[item.id] || 1;
             const isAdded = addedNotice === item.id;
+            const ratingInfo = ratingsMap[item.id] || { avg: 4.9, count: 8 };
 
             return (
               <div key={item.id} className="menu-card group">
-                <div className="menu-card-image-wrapper">
+                <div
+                  className="menu-card-image-wrapper cursor-pointer"
+                  onClick={() => setDetailsItem(item)}
+                >
                   <img
                     src={item.imageUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'}
                     alt={item.name}
-                    className="menu-card-image"
+                    className="menu-card-image group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="category-badge">{item.categoryName}</span>
                   {item.available ? (
@@ -147,15 +192,39 @@ export const MenuPage: React.FC = () => {
                   ) : (
                     <span className="availability-badge unavailable">Sold Out</span>
                   )}
+
+                  {/* Rating Tag */}
+                  <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-md text-[11px] font-bold text-amber-400 flex items-center gap-1 border border-amber-500/30">
+                    <Star className="w-3 h-3 fill-amber-400" />
+                    <span>{ratingInfo.avg.toFixed(1)}</span>
+                    <span className="text-slate-400 text-[10px]">({ratingInfo.count})</span>
+                  </div>
                 </div>
 
                 <div className="menu-card-content">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="menu-item-title">{item.name}</h3>
+                  <div className="flex justify-between items-start mb-1.5">
+                    <h3
+                      className="menu-item-title cursor-pointer hover:text-amber-400 transition-colors"
+                      onClick={() => setDetailsItem(item)}
+                    >
+                      {item.name}
+                    </h3>
                     <span className="menu-item-price">${item.price.toFixed(2)}</span>
                   </div>
 
                   <p className="menu-item-desc">{item.description}</p>
+
+                  {/* Reviews & Details button */}
+                  <div className="my-2">
+                    <button
+                      type="button"
+                      onClick={() => setDetailsItem(item)}
+                      className="text-[11px] text-amber-400/90 hover:text-amber-300 flex items-center gap-1"
+                    >
+                      <MessageSquare className="w-3 h-3" />
+                      <span>Reviews & Ingredients ({ratingInfo.count})</span>
+                    </button>
+                  </div>
 
                   <div className="card-actions">
                     <div className="qty-control">
@@ -200,6 +269,14 @@ export const MenuPage: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Dish Details & Reviews Modal */}
+      <DishDetailsModal
+        item={detailsItem}
+        isOpen={!!detailsItem}
+        onClose={() => setDetailsItem(null)}
+        onReviewAdded={fetchRatingSummaries}
+      />
     </div>
   );
 };
