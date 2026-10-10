@@ -1333,6 +1333,69 @@ textarea {
   font-family: inherit;
 }
 
+button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  line-height: 1.2;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-cancel,
+.btn-kanban-next,
+.btn-kanban-cancel,
+.toggle-avail-btn,
+.history-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  gap: 0.45rem;
+}
+
+.menu-card-content > .my-2 {
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu-card-content > .my-2 button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.5rem;
+  padding: 0.2rem 0;
+  color: var(--amber-primary);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.menu-card-content > .my-2 button:hover {
+  color: #fbbf24;
+}
+
+.search-box,
+.input-field {
+  min-height: 2.75rem;
+}
+
+.search-box .search-input {
+  min-width: 0;
+}
+
+.card-actions .qty-control,
+.card-actions .add-cart-btn {
+  min-height: 2.5rem;
+}
+
 .navbar-container {
   background: rgba(11, 15, 25, 0.96);
   border-bottom-color: rgba(245, 158, 11, 0.18);
@@ -1561,6 +1624,20 @@ footer {
 
   .card-actions {
     flex-wrap: wrap;
+  }
+
+  .card-actions .add-cart-btn {
+    flex: 1 1 9rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    max-width: 100%;
+  }
+
+  .order-card-header > div:last-child {
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
 
   .qty-control {

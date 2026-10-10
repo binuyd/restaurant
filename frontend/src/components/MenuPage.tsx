@@ -4,6 +4,7 @@ import type { MenuItem, Category, MenuItemRatingSummaryDto } from '../types';
 import { api } from '../api/client';
 import { useCart } from '../context/CartContext';
 import { DishDetailsModal } from './DishDetailsModal';
+import './MenuPage.css';
 
 interface MenuPageProps {
   onNavigateToReservation?: () => void;
@@ -93,7 +94,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
   );
 
   return (
-    <div className="menu-page-container">
+    <div className="menu-page-container menu-page">
       {/* Hero Banner */}
       <div className="hero-banner">
         <div className="hero-badge">
@@ -102,7 +103,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
         </div>
         <h1 className="hero-title">Today's menu</h1>
         {/* Quick CTA Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 my-4">
+        <div className="menu-quick-actions">
           {onNavigateToReservation && (
             <button
               onClick={onNavigateToReservation}
@@ -112,7 +113,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
               <span>Book a table</span>
             </button>
           )}
-          <div className="text-xs text-slate-400 bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-800">
+          <div className="menu-hours">
             12:00 PM – 11:00 PM
           </div>
         </div>

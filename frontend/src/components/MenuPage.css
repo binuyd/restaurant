@@ -1,0 +1,179 @@
+.menu-page {
+  --menu-gutter: clamp(1rem, 3vw, 2.5rem);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--menu-gutter) 4rem;
+}
+
+.menu-page .hero-banner {
+  max-width: 1120px;
+  margin: clamp(2rem, 6vw, 5rem) auto 2.25rem;
+  padding: 0;
+  text-align: left;
+}
+
+.menu-page .hero-badge {
+  margin-bottom: 1rem;
+}
+
+.menu-page .hero-title {
+  max-width: 720px;
+  margin-bottom: 1.25rem;
+}
+
+.menu-page .menu-quick-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.menu-page .menu-hours {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.menu-page .search-box {
+  max-width: 620px;
+  min-height: 2.9rem;
+  margin: 0;
+}
+
+.menu-page .category-pills-container {
+  justify-content: flex-start;
+  max-width: 1280px;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+}
+
+.menu-page .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.menu-page .menu-card {
+  min-width: 0;
+  border-radius: 9px;
+}
+
+.menu-page .menu-card-image-wrapper {
+  height: 205px;
+}
+
+.menu-page .menu-card-content {
+  min-width: 0;
+  padding: 1.1rem;
+}
+
+.menu-page .menu-card-content > .flex:first-child {
+  gap: 0.75rem;
+}
+
+.menu-page .menu-item-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.menu-page .menu-item-price {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.menu-page .menu-item-desc {
+  min-height: 3rem;
+}
+
+.menu-page .menu-card-content > .my-2 {
+  min-height: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.menu-page .menu-card-content > .my-2 button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.5rem;
+  padding: 0.2rem 0;
+  color: var(--amber-primary);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.menu-page .card-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.menu-page .qty-control {
+  flex: 0 0 auto;
+  min-height: 2.5rem;
+}
+
+.menu-page .add-cart-btn {
+  min-width: 0;
+  min-height: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .menu-page {
+    padding: 0 1rem 3rem;
+  }
+
+  .menu-page .hero-banner {
+    margin-top: 2rem;
+  }
+
+  .menu-page .hero-title {
+    font-size: clamp(2.2rem, 12vw, 3.25rem);
+  }
+
+  .menu-page .menu-quick-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .menu-page .menu-quick-actions > * {
+    width: 100%;
+  }
+
+  .menu-page .menu-hours {
+    justify-content: center;
+  }
+
+  .menu-page .category-pills-container {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .menu-page .category-pills-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-page .pill-btn {
+    flex: 0 0 auto;
+  }
+
+  .menu-page .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-page .card-actions {
+    flex-wrap: wrap;
+  }
+
+  .menu-page .add-cart-btn {
+    flex: 1 1 9rem;
+  }
+}
