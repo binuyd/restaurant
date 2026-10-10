@@ -51,7 +51,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal-card max-w-md w-full">
         <button onClick={onClose} className="modal-close-btn">
           <X className="w-5 h-5" />

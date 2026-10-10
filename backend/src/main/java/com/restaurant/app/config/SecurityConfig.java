@@ -53,7 +53,7 @@ public class SecurityConfig {
                 // H2 Console & Swagger UI
                 .requestMatchers("/h2-console/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                 // Admin endpoints
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "STAFF")
                 // Customer/User orders and reservations management
                 .requestMatchers("/api/orders/**").authenticated()
                 .requestMatchers("/api/reservations/**").authenticated()

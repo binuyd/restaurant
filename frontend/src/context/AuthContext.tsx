@@ -9,7 +9,7 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
-  isAdmin: boolean;
+  isAdmin: boolean;  // true for ADMIN and STAFF roles (staff have kitchen/admin access)
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         register,
         logout,
         isAuthenticated: !!token && !!user,
-        isAdmin: user?.role === 'ADMIN',
+        isAdmin: user?.role === 'ADMIN' || user?.role === 'STAFF',
       }}
     >
       {children}

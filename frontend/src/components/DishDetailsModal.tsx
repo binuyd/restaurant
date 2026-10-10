@@ -87,8 +87,8 @@ export const DishDetailsModal: React.FC<DishDetailsModalProps> = ({
     : '5.0';
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-card max-w-2xl max-h-[90vh] overflow-y-auto p-0">
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="modal-card max-w-2xl w-full p-0 overflow-hidden" style={{ maxHeight: '92vh', overflowY: 'auto' }}>
         {/* Header Image */}
         <div className="relative h-64 w-full overflow-hidden bg-slate-900">
           <img

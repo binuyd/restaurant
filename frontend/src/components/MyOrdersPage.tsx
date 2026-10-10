@@ -83,7 +83,7 @@ export const MyOrdersPage: React.FC = () => {
           <div className="spinner"></div>
         </div>
       ) : orders.length === 0 ? (
-        <div className="glass-card text-center py-16 px-4">
+        <div className="glass-card p-8 text-center py-16 px-4">
           <Clock className="w-16 h-16 text-slate-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-slate-200">No Orders Placed Yet</h3>
           <p className="text-sm text-slate-400 mt-1">Visit our menu to place your first gourmet order!</p>

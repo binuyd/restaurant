@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, MapPin, CheckCircle, Search, RefreshCw, UserCheck, Plus, AlertCircle } from 'lucide-react';
+import { Calendar, Users, MapPin, CheckCircle, XCircle, Search, RefreshCw, UserCheck, Plus, AlertCircle } from 'lucide-react';
 import type { ReservationDto, ReservationStatus } from '../types';
 import { api } from '../api/client';
 
@@ -179,7 +179,7 @@ export const AdminReservationsPage: React.FC = () => {
           <div className="spinner"></div>
         </div>
       ) : filteredReservations.length === 0 ? (
-        <div className="glass-card text-center py-16">
+        <div className="glass-card p-8 text-center py-16">
           <Calendar className="w-12 h-12 text-slate-600 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-slate-200">No Reservations Found</h3>
           <p className="text-xs text-slate-400 mt-1">Try adjusting the filter criteria or register a walk-in booking.</p>
@@ -283,8 +283,8 @@ export const AdminReservationsPage: React.FC = () => {
 
       {/* Walk-in Booking Modal */}
       {isWalkInModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-card">
+        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setIsWalkInModalOpen(false)}>
+          <div className="modal-card max-w-md w-full">
             <h2 className="text-xl font-bold text-slate-100 mb-4">Register Walk-in Guest Table</h2>
             {walkInError && (
               <div className="error-banner mb-4">

@@ -93,7 +93,7 @@ export const KitchenKdsPage: React.FC = () => {
           <div className="spinner"></div>
         </div>
       ) : orders.length === 0 ? (
-        <div className="glass-card text-center py-20">
+        <div className="glass-card p-8 text-center py-20">
           <ChefHat className="w-16 h-16 text-slate-600 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-slate-200">Kitchen Queue is Clear!</h3>
           <p className="text-sm text-slate-400 mt-1">All orders are cooked, served, or completed.</p>

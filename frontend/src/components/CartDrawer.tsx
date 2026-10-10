@@ -245,7 +245,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 {cart.map((item) => (
                   <div key={item.menuItem.id} className="cart-item-card">
                     <img
-                      src={item.menuItem.imageUrl}
+                      src={item.menuItem.imageUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=100&q=80'}
                       alt={item.menuItem.name}
                       className="cart-item-img"
                     />

@@ -46,6 +46,26 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
+/* Use .glass-card.p-6 etc for content padding — table wrappers use overflow-hidden */
+.glass-card.p-4  { padding: 1rem; }
+.glass-card.p-5  { padding: 1.25rem; }
+.glass-card.p-6  { padding: 1.5rem; }
+.glass-card.p-8  { padding: 2rem; }
+.glass-card.overflow-hidden { overflow: hidden; }
+.glass-card.overflow-x-auto { overflow-x: auto; }
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 5rem 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+}
+
 /* Navbar Styling */
 .navbar-container {
   position: sticky;
@@ -351,6 +371,11 @@ h1, h2, h3, h4, .font-display {
   outline: none;
   width: 100%;
   font-size: 0.95rem;
+  font-family: var(--font-family);
+}
+
+.search-input::placeholder {
+  color: #64748b;
 }
 
 /* Category Pills */
@@ -593,6 +618,7 @@ h1, h2, h3, h4, .font-display {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .modal-card {
@@ -601,9 +627,10 @@ h1, h2, h3, h4, .font-display {
   border-radius: 20px;
   padding: 2rem;
   width: 100%;
-  max-width: 440px;
+  /* No max-width here — let JSX classes (max-w-md, max-w-2xl) control it */
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  margin: auto;
 }
 
 .modal-close-btn, .drawer-close-btn {
@@ -643,10 +670,17 @@ h1, h2, h3, h4, .font-display {
   outline: none;
   font-size: 0.9rem;
   transition: border-color 0.2s;
+  font-family: var(--font-family);
+  resize: vertical;
+}
+
+.input-field::placeholder {
+  color: #475569;
 }
 
 .input-field:focus {
   border-color: var(--amber-primary);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
 }
 
 select.input-field option {
@@ -866,10 +900,11 @@ select.input-field option {
   color: #34d399;
 }
 
+/* current overrides completed so active step pulses amber */
 .step-circle.current {
-  background: var(--amber-primary);
-  border-color: var(--amber-primary);
-  color: #0b0f19;
+  background: var(--amber-primary) !important;
+  border-color: var(--amber-primary) !important;
+  color: #0b0f19 !important;
   box-shadow: 0 0 15px var(--amber-glow);
 }
 
@@ -1018,6 +1053,12 @@ select.input-field option {
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: 0.3rem;
+  transition: opacity 0.2s;
+}
+
+.btn-kanban-next:hover {
+  opacity: 0.85;
 }
 
 .btn-kanban-cancel {
@@ -1081,14 +1122,22 @@ select.input-field option {
   font-size: 0.75rem;
   font-weight: 700;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 6px;
+  transition: all 0.2s;
+  color: #f87171;
+}
+
+.toggle-avail-btn:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 .toggle-avail-btn.active {
   color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 /* Dashboard Metric Cards */
@@ -1202,7 +1251,7 @@ select.input-field option {
     top: calc(100% + 0.65rem);
     left: 0;
     right: 0;
-    z-index: 5;
+    z-index: 45;
     flex-direction: column;
     align-items: stretch;
     gap: 0.25rem;

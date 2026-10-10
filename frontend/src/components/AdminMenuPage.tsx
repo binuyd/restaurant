@@ -227,8 +227,8 @@ export const AdminMenuPage: React.FC = () => {
 
       {/* Modal Form */}
       {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-card">
+        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setIsModalOpen(false)}>
+          <div className="modal-card max-w-lg w-full">
             <h2 className="text-xl font-bold text-slate-100 mb-4">
               {editingItem ? 'Edit Menu Item' : 'Add New Menu Item'}
             </h2>

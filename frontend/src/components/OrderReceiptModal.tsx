@@ -32,7 +32,7 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({ order, isO
   const grandTotal = Number((subtotal + tax).toFixed(2));
 
   return (
-    <div className="receipt-modal-overlay">
+    <div className="receipt-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="receipt-modal-wrapper">
         {/* Action bar for non-print view */}
         <div className="receipt-actions-bar">
