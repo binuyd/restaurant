@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/admin/menu-items")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
 @Tag(name = "Admin Menu Management", description = "Admin endpoints for creating, updating, and deleting menu items")
 public class AdminMenuController {
 
