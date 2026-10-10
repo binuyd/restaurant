@@ -45,7 +45,7 @@ public class ReservationController {
             @AuthenticationPrincipal UserPrincipal userPrincipal,
             @PathVariable Long id) {
         boolean isAdmin = userPrincipal.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN") || a.getAuthority().equals("ROLE_STAFF"));
         return ResponseEntity.ok(reservationService.cancelReservation(id, userPrincipal.getId(), isAdmin));
     }
 }
