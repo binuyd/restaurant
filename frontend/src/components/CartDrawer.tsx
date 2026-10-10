@@ -105,7 +105,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="empty-cart-state py-12 text-center">
               <ShoppingBag className="w-16 h-16 text-slate-600 mb-4 mx-auto" />
               <p className="text-slate-300 font-medium">Your cart is empty</p>
-              <p className="text-xs text-slate-400 mt-1">Browse our menu and add delicious items!</p>
             </div>
           ) : (
             <>

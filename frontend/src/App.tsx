@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { Navbar } from './components/Navbar';
@@ -19,6 +19,14 @@ const MainContent: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   const { isAuthenticated, isAdmin } = useAuth();
+
+  useEffect(() => {
+    if (isAdmin && ['menu', 'reservations', 'my-orders'].includes(currentTab)) {
+      setCurrentTab('admin-dashboard');
+    } else if (!isAuthenticated && currentTab !== 'menu') {
+      setCurrentTab('menu');
+    }
+  }, [isAdmin, isAuthenticated, currentTab]);
 
   const handleOrderPlaced = () => {
     setCurrentTab('my-orders');

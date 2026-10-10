@@ -108,16 +108,9 @@ export const ReservationPage: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold mb-3">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Table Bookings & Private Dining</span>
-        </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-          Reserve Your Dining Experience
+          Reserve a table
         </h1>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto mt-2">
-          Reserve an exquisite table in our artisanal restaurant. Instant confirmation with zero prepayment required.
-        </p>
 
         {/* Tab switcher */}
         <div className="flex justify-center mt-6">
@@ -155,9 +148,6 @@ export const ReservationPage: React.FC = () => {
               <CheckCircle className="w-8 h-8" />
             </div>
             <h2 className="text-2xl font-bold text-slate-100">Table Reservation Confirmed!</h2>
-            <p className="text-sm text-slate-400 mt-2">
-              We look forward to welcoming you, <span className="text-slate-200 font-semibold">{successBooking.guestName}</span>.
-            </p>
 
             <div className="bg-slate-900/80 rounded-xl p-4 my-6 text-left text-xs space-y-2 border border-slate-800">
               <div className="flex justify-between">
@@ -378,7 +368,7 @@ export const ReservationPage: React.FC = () => {
                   <span>{submitting ? 'Confirming Table...' : 'Confirm Table Reservation (No Payment Required)'}</span>
                 </button>
                 <p className="text-center text-[11px] text-slate-500 mt-2">
-                  No credit card required. Free cancellation anytime.
+                  No payment required.
                 </p>
               </div>
             </form>
@@ -395,7 +385,6 @@ export const ReservationPage: React.FC = () => {
             <div className="glass-card text-center py-16">
               <Calendar className="w-12 h-12 text-slate-600 mx-auto mb-3" />
               <h3 className="text-lg font-semibold text-slate-200">No Reservations Yet</h3>
-              <p className="text-xs text-slate-400 mt-1">Book your table now to enjoy an unforgettable dining experience.</p>
               <button onClick={() => setActiveTab('book')} className="btn-primary text-xs mt-4">
                 Book a Table Now
               </button>

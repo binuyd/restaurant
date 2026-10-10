@@ -64,9 +64,6 @@ export const MyOrdersPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">My Orders & Live Status</h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Track dining orders from kitchen prep to table serving. (Auto-refreshes every 10s)
-          </p>
         </div>
 
         <button
@@ -86,7 +83,6 @@ export const MyOrdersPage: React.FC = () => {
         <div className="glass-card p-8 text-center py-16 px-4">
           <Clock className="w-16 h-16 text-slate-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-slate-200">No Orders Placed Yet</h3>
-          <p className="text-sm text-slate-400 mt-1">Visit our menu to place your first gourmet order!</p>
         </div>
       ) : (
         <div className="space-y-6">

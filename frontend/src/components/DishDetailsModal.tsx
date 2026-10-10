@@ -136,7 +136,6 @@ export const DishDetailsModal: React.FC<DishDetailsModalProps> = ({
               <span className="text-sm font-semibold text-slate-200">
                 {reviews.length} Verified Customer {reviews.length === 1 ? 'Review' : 'Reviews'}
               </span>
-              <p className="text-xs text-slate-400">Authentic feedback from diners</p>
             </div>
           </div>
 

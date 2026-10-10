@@ -52,9 +52,6 @@ export const AdminDashboardPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-100">Sales & Revenue Analytics</h1>
-        <p className="text-sm text-slate-400 mt-1">
-          Server-side SQL aggregation metrics for order volume, status breakdown, and top sellers.
-        </p>
       </div>
 
       {/* KPI Cards */}
@@ -166,7 +163,7 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
 
         {data.topSellingItems.length === 0 ? (
-          <p className="text-sm text-slate-400">No completed sales yet.</p>
+          <p className="text-sm text-slate-400">No sales yet.</p>
         ) : (
           <table className="admin-table">
             <thead>

@@ -57,9 +57,6 @@ export const AdminOrdersBoard: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">Admin Orders Kanban Board</h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Enforce validated order lifecycle transitions & optimistic locking.
-          </p>
         </div>
 
         <button

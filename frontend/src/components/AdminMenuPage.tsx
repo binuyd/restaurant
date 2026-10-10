@@ -121,9 +121,6 @@ export const AdminMenuPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">Menu Management</h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Create, update, toggle availability, or delete items from the restaurant menu.
-          </p>
         </div>
 
         <button onClick={openCreateModal} className="btn-primary flex items-center gap-2">

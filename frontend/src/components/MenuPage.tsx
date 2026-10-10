@@ -98,14 +98,9 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
       <div className="hero-banner">
         <div className="hero-badge">
           <Flame className="w-4 h-4 text-amber-400" />
-          <span>Artisanal Culinary Craftsmanship • Zero Online Payment Required</span>
+          <span>Plant-based kitchen</span>
         </div>
-        <h1 className="hero-title">Experience Exquisite Dining</h1>
-        <p className="hero-subtitle">
-          Handcrafted dishes prepared with fresh organic ingredients, traditional recipes, and contemporary passion.
-          Order for dine-in table service, takeaway, or direct delivery.
-        </p>
-
+        <h1 className="hero-title">Today's menu</h1>
         {/* Quick CTA Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-3 my-4">
           {onNavigateToReservation && (
@@ -114,11 +109,11 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
               className="btn-primary py-2.5 px-5 text-xs font-semibold flex items-center gap-2"
             >
               <Calendar className="w-4 h-4" />
-              <span>Book a Table (Instant Confirmation)</span>
+              <span>Book a table</span>
             </button>
           )}
           <div className="text-xs text-slate-400 bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-800">
-            Open daily: 12:00 PM – 11:00 PM • Cash & In-Person Checkout
+            12:00 PM – 11:00 PM
           </div>
         </div>
 
@@ -127,7 +122,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onNavigateToReservation }) =
           <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
           <input
             type="text"
-            placeholder="Search appetizers, chef mains, woodfired pizzas, desserts..."
+            placeholder="Search the menu"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"

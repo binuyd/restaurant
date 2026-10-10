@@ -54,15 +54,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
             Menu
           </button>
 
-          <button
-            onClick={() => navigate('reservations')}
-            className={`nav-btn ${currentTab === 'reservations' ? 'active' : ''}`}
-          >
-            <Calendar className="w-4 h-4 mr-1.5 inline text-amber-400" />
-            Book Table
-          </button>
+          {!isAdmin && (
+            <button
+              onClick={() => navigate('reservations')}
+              className={`nav-btn ${currentTab === 'reservations' ? 'active' : ''}`}
+            >
+              <Calendar className="w-4 h-4 mr-1.5 inline text-amber-400" />
+              Book Table
+            </button>
+          )}
 
-          {isAuthenticated && (
+          {isAuthenticated && !isAdmin && (
             <button
               onClick={() => navigate('my-orders')}
               className={`nav-btn ${currentTab === 'my-orders' ? 'active' : ''}`}
@@ -116,13 +118,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
         {/* Right Actions: Cart & Auth */}
         <div className="navbar-actions flex items-center gap-3">
           {/* Cart Button */}
-          <button onClick={onOpenCart} className="cart-btn">
-            <ShoppingBag className="w-5 h-5 text-amber-400" />
-            <span className="hidden sm:inline font-medium text-sm">Cart</span>
-            {totalItemsCount > 0 && (
-              <span className="cart-badge">{totalItemsCount}</span>
-            )}
-          </button>
+          {!isAdmin && (
+            <button onClick={onOpenCart} className="cart-btn">
+              <ShoppingBag className="w-5 h-5 text-amber-400" />
+              <span className="hidden sm:inline font-medium text-sm">Cart</span>
+              {totalItemsCount > 0 && (
+                <span className="cart-badge">{totalItemsCount}</span>
+              )}
+            </button>
+          )}
 
           {/* Auth Button */}
           {isAuthenticated ? (

@@ -62,9 +62,6 @@ export const KitchenKdsPage: React.FC = () => {
             <span>Live Kitchen Display System (KDS)</span>
           </div>
           <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Chef Order Terminal</h1>
-          <p className="text-sm text-slate-400">
-            Real-time active queue for chefs & prep line. Auto-refreshes every 8 seconds.
-          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -96,7 +93,6 @@ export const KitchenKdsPage: React.FC = () => {
         <div className="glass-card p-8 text-center py-20">
           <ChefHat className="w-16 h-16 text-slate-600 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-slate-200">Kitchen Queue is Clear!</h3>
-          <p className="text-sm text-slate-400 mt-1">All orders are cooked, served, or completed.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

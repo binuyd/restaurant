@@ -98,9 +98,6 @@ export const AdminReservationsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Table Reservations Management</h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Host table seating, confirmations, and guest reception desk.
-          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -182,7 +179,6 @@ export const AdminReservationsPage: React.FC = () => {
         <div className="glass-card p-8 text-center py-16">
           <Calendar className="w-12 h-12 text-slate-600 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-slate-200">No Reservations Found</h3>
-          <p className="text-xs text-slate-400 mt-1">Try adjusting the filter criteria or register a walk-in booking.</p>
         </div>
       ) : (
         <div className="space-y-3">

@@ -50,8 +50,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           </h2>
           <p className="text-sm text-slate-400 mt-1">
             {isRegister
-              ? 'Join Gourmet Haven to place and track orders'
-              : 'Sign in to access your orders, bookings & staff tools'}
+              ? 'Create a customer account'
+              : 'Sign in to continue'}
           </p>
         </div>
 

@@ -155,7 +155,6 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({ order, isO
           <div className="receipt-footer text-center mt-6 text-[11px] text-slate-500 space-y-1">
             <p className="font-medium text-slate-700">Thank you for dining with Gourmet Haven!</p>
             <p>Please present this receipt when settling your bill at the counter or to your server.</p>
-            <p className="pt-2 text-[10px] text-slate-400">Powered by Gourmet Haven Restaurant OS</p>
           </div>
         </div>
       </div>
