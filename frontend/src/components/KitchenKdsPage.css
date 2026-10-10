@@ -1,0 +1,13 @@
+.kds-page { width:min(100% - 2rem,1440px); margin:0 auto; padding:clamp(1.5rem,4vw,3rem) 0; color:#f8fafc; }
+.kds-page .kds-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+.kds-page .kds-order-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.kds-page .kds-order-card { min-width:0; overflow-wrap:anywhere; background:rgba(21,27,41,.96); border:1px solid rgba(255,255,255,.1); border-radius:9px; }
+.kds-page .kds-order-card button { min-height:2.5rem; min-width:0; white-space:normal; text-align:center; }
+@media (max-width:768px) {
+ .kds-page { width:calc(100% - 2rem); padding:1.5rem 0 2.5rem; }
+ .kds-page .kds-header { flex-direction:column; align-items:stretch; }
+ .kds-page .kds-header > div:last-child { display:flex; flex-wrap:wrap; }
+ .kds-page .kds-header button { flex:1 1 10rem; }
+ .kds-page h1 { font-size:clamp(1.7rem,8vw,2.35rem); line-height:1.05; }
+ .kds-page .kds-order-grid { grid-template-columns:1fr; }
+}

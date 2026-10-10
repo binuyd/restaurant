@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import type { OrderType } from '../types';
 import { api } from '../api/client';
-import './PageLayouts.css';
+import './CartDrawer.css';
 
 interface CartDrawerProps {
   isOpen: boolean;

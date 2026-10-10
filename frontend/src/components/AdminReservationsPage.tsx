@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Users, MapPin, CheckCircle, XCircle, Search, RefreshCw, UserCheck, Plus, AlertCircle } from 'lucide-react';
 import type { ReservationDto, ReservationStatus } from '../types';
 import { api } from '../api/client';
-import './PageLayouts.css';
+import './AdminReservationsPage.css';
 
 export const AdminReservationsPage: React.FC = () => {
   const [reservations, setReservations] = useState<ReservationDto[]>([]);
@@ -94,9 +94,9 @@ export const AdminReservationsPage: React.FC = () => {
   });
 
   return (
-    <div className="admin-page max-w-7xl mx-auto px-4 py-8">
+    <div className="admin-reservations-page max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+      <div className="admin-reservations-header flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Table Reservations Management</h1>
         </div>
@@ -121,7 +121,7 @@ export const AdminReservationsPage: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="glass-card p-4 mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      <div className="reservation-filter-bar glass-card p-4 mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         {/* Search */}
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
@@ -188,7 +188,7 @@ export const AdminReservationsPage: React.FC = () => {
             return (
               <div
                 key={res.id}
-                className={`glass-card p-4 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 border ${
+                className={`reservation-row glass-card p-4 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 border ${
                   isToday ? 'border-amber-500/40 bg-amber-950/10' : 'border-slate-800'
                 }`}
               >

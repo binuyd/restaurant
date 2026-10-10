@@ -3,7 +3,7 @@ import { RefreshCw, Clock, XCircle, CheckCircle2, AlertCircle, ChevronDown, Chev
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 import { OrderReceiptModal } from './OrderReceiptModal';
-import './PageLayouts.css';
+import './MyOrdersPage.css';
 
 export const MyOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);

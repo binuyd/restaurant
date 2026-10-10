@@ -3,7 +3,7 @@ import { DollarSign, ShoppingBag, TrendingUp, Trophy, PieChart as PieIcon, BarCh
 import type { DashboardSummaryDto } from '../types';
 import { api } from '../api/client';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
-import './PageLayouts.css';
+import './AdminDashboardPage.css';
 
 export const AdminDashboardPage: React.FC = () => {
   const [data, setData] = useState<DashboardSummaryDto | null>(null);
@@ -50,8 +50,8 @@ export const AdminDashboardPage: React.FC = () => {
   }));
 
   return (
-    <div className="admin-page max-w-6xl mx-auto px-4 py-8">
-      <div className="mb-8">
+    <div className="admin-dashboard-page max-w-6xl mx-auto px-4 py-8">
+      <div className="dashboard-header mb-8">
         <h1 className="text-3xl font-bold text-slate-100">Sales & Revenue Analytics</h1>
       </div>
 
@@ -157,7 +157,7 @@ export const AdminDashboardPage: React.FC = () => {
       </div>
 
       {/* Top 5 Leaderboard Table */}
-      <div className="glass-card p-6">
+      <div className="leaderboard glass-card p-6">
         <div className="flex items-center gap-2 mb-4">
           <Trophy className="w-5 h-5 text-amber-400" />
           <h3 className="text-lg font-bold text-slate-200">Top Performing Dishes</h3>

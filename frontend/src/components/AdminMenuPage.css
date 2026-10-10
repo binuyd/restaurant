@@ -1,0 +1,14 @@
+.admin-menu-page { width: min(100% - 2rem, 1200px); margin: 0 auto; padding: clamp(1.5rem,4vw,3rem) 0; color: #f8fafc; }
+.admin-menu-page .admin-menu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.admin-menu-page .admin-table-wrap { width: 100%; overflow-x: auto; background: rgba(21,27,41,.96); border: 1px solid rgba(255,255,255,.1); border-radius: 9px; }
+.admin-menu-page .admin-table { min-width: 680px; color: #f8fafc; }
+.admin-menu-page .admin-table th { background: #101622; color: #9aa8bb; border-color: rgba(255,255,255,.1); }
+.admin-menu-page .admin-table td { border-color: rgba(255,255,255,.1); }
+.admin-menu-page .input-field { min-height: 2.75rem; background: #101622; border: 1px solid rgba(255,255,255,.1); border-radius: 7px; color: #f8fafc; }
+.admin-menu-page .btn-primary, .admin-menu-page .btn-secondary { min-height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; white-space: normal; text-align: center; }
+@media (max-width: 768px) {
+  .admin-menu-page { width: calc(100% - 2rem); padding: 1.5rem 0 2.5rem; }
+  .admin-menu-page .admin-menu-header { flex-direction: column; align-items: stretch; }
+  .admin-menu-page h1 { font-size: clamp(1.7rem,8vw,2.35rem); line-height: 1.05; }
+  .admin-menu-page .admin-menu-header > button { width: 100%; }
+}

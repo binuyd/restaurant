@@ -1,0 +1,7 @@
+.cart-drawer .drawer-content { width:min(100%,440px); min-width:0; background:#111827; border-left:1px solid rgba(255,255,255,.1); color:#f8fafc; }
+.cart-drawer .drawer-header, .cart-drawer .drawer-body, .cart-drawer .drawer-footer { padding:1.15rem; }
+.cart-drawer .drawer-header, .cart-drawer .drawer-footer { border-color:rgba(255,255,255,.1); }
+.cart-drawer .cart-item-card { min-width:0; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:7px; }
+.cart-drawer .cart-item-card h4 { overflow-wrap:anywhere; }
+.cart-drawer .drawer-footer .btn-primary { min-height:2.75rem; display:flex; align-items:center; justify-content:center; gap:.45rem; white-space:normal; text-align:center; }
+@media (max-width:520px) { .cart-drawer .drawer-content { max-width:none; } .cart-drawer .drawer-header, .cart-drawer .drawer-body, .cart-drawer .drawer-footer { padding:1rem; } }

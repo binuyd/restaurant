@@ -3,7 +3,7 @@ import { X, Star, MessageSquare, Send, CheckCircle2, AlertCircle } from 'lucide-
 import type { MenuItem, ReviewDto } from '../types';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
-import './PageLayouts.css';
+import './DishDetailsModal.css';
 
 interface DishDetailsModalProps {
   item: MenuItem | null;

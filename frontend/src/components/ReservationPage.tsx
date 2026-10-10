@@ -3,7 +3,7 @@ import { Calendar, Clock, Users, Sparkles, MapPin, CheckCircle, AlertCircle, Hea
 import type { ReservationDto, CreateReservationRequest } from '../types';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
-import './PageLayouts.css';
+import './ReservationPage.css';
 
 export const ReservationPage: React.FC = () => {
   const { user, isAuthenticated } = useAuth();

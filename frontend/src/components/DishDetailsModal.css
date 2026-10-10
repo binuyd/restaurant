@@ -1,0 +1,4 @@
+.dish-details-modal .modal-card { width:min(100%,720px); min-width:0; max-height:92vh; overflow-y:auto; background:#111827; color:#f8fafc; border:1px solid rgba(245,158,11,.18); border-radius:12px; }
+.dish-details-modal .input-field { min-height:2.6rem; background:#101622; border:1px solid rgba(255,255,255,.1); border-radius:7px; color:#f8fafc; }
+.dish-details-modal button { min-width:0; white-space:normal; }
+@media (max-width:520px) { .dish-details-modal { padding:.75rem; align-items:flex-start; overflow-y:auto; } .dish-details-modal .modal-card { margin:auto 0; } }

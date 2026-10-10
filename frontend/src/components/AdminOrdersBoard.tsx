@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, RefreshCw, ShieldAlert, Printer } from 'lucide-react';
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
-import './PageLayouts.css';
+import './AdminOrdersBoard.css';
 import { OrderReceiptModal } from './OrderReceiptModal';
 
 export const AdminOrdersBoard: React.FC = () => {
@@ -54,8 +54,8 @@ export const AdminOrdersBoard: React.FC = () => {
   };
 
   return (
-    <div className="admin-page max-w-7xl mx-auto px-4 py-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <div className="admin-orders-page max-w-7xl mx-auto px-4 py-8">
+      <div className="admin-orders-header flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">Admin Orders Kanban Board</h1>
         </div>

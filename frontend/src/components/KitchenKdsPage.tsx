@@ -3,7 +3,7 @@ import { ChefHat, Clock, AlertTriangle, CheckCircle2, Play, Check, RefreshCw, Vo
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 import { OrderReceiptModal } from './OrderReceiptModal';
-import './PageLayouts.css';
+import './KitchenKdsPage.css';
 
 export const KitchenKdsPage: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);
@@ -56,7 +56,7 @@ export const KitchenKdsPage: React.FC = () => {
   return (
     <div className="kds-page max-w-7xl mx-auto px-4 py-8">
       {/* KDS Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+      <div className="kds-header flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold mb-2">
             <ChefHat className="w-3.5 h-3.5" />
@@ -105,7 +105,7 @@ export const KitchenKdsPage: React.FC = () => {
             return (
               <div
                 key={order.id}
-                className={`glass-card flex flex-col justify-between transition-all border ${
+                className={`kds-order-card glass-card flex flex-col justify-between transition-all border ${
                   isUrgent
                     ? 'border-rose-500/70 bg-rose-950/10'
                     : isWarning

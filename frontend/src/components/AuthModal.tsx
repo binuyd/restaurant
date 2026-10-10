@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, LogIn, UserPlus, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import './PageLayouts.css';
+import './AuthModal.css';
 
 interface AuthModalProps {
   isOpen: boolean;

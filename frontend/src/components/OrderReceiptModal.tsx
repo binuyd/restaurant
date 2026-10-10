@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Printer, Utensils, CheckCircle } from 'lucide-react';
 import type { OrderDto } from '../types';
-import './PageLayouts.css';
+import './OrderReceiptModal.css';
 
 interface OrderReceiptModalProps {
   order: OrderDto | null;
