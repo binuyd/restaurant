@@ -32,6 +32,23 @@ public class Order {
     @Column(nullable = false, length = 30)
     private OrderStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "order_type", length = 20)
+    @Builder.Default
+    private com.restaurant.app.domain.enums.OrderType orderType = com.restaurant.app.domain.enums.OrderType.DINE_IN;
+
+    @Column(name = "table_number", length = 30)
+    private String tableNumber;
+
+    @Column(name = "customer_phone", length = 50)
+    private String customerPhone;
+
+    @Column(name = "delivery_address", length = 255)
+    private String deliveryAddress;
+
+    @Column(name = "special_notes")
+    private String specialNotes;
+
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
 

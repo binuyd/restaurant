@@ -45,14 +45,19 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Public auth endpoints
                 .requestMatchers("/api/auth/**").permitAll()
-                // Public menu browsing
+                // Public menu browsing & reviews browsing
                 .requestMatchers(HttpMethod.GET, "/api/menu/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/reviews/**").permitAll()
+                // Allow table reservations (guests and logged in users)
+                .requestMatchers(HttpMethod.POST, "/api/reservations").permitAll()
                 // H2 Console & Swagger UI
                 .requestMatchers("/h2-console/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                 // Admin endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                // Customer/User orders
+                // Customer/User orders and reservations management
                 .requestMatchers("/api/orders/**").authenticated()
+                .requestMatchers("/api/reservations/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/api/reviews/**").authenticated()
                 .anyRequest().authenticated()
             );
 
