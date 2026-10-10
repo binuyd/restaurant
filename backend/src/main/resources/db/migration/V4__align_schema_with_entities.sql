@@ -1,6 +1,6 @@
 -- V4__align_schema_with_entities.sql
-DO $$ 
-BEGIN 
+SELECT 1;
+/*
     -- 1. Align USERS table
     IF EXISTS (
         SELECT 1 FROM information_schema.columns 
@@ -86,4 +86,4 @@ BEGIN
         );
     END IF;
 
-END $$;
+*/

@@ -1,6 +1,6 @@
 -- V8__fix_menu_item_fk.sql
-DO $$ 
-BEGIN 
+SELECT 1;
+/*
     -- Drop legacy foreign key pointing to food_items
     IF EXISTS (
         SELECT 1 FROM information_schema.table_constraints 
@@ -18,4 +18,4 @@ BEGIN
         FOREIGN KEY (menu_item_id) REFERENCES menu_items(id) ON DELETE CASCADE;
     END IF;
 
-END $$;
+*/

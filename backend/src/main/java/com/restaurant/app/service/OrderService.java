@@ -53,6 +53,9 @@ public class OrderService {
         BigDecimal grandTotal = BigDecimal.ZERO;
 
         for (OrderItemRequest itemReq : request.getItems()) {
+            if (itemReq.getQuantity() == null || itemReq.getQuantity() < 1) {
+                throw new BadRequestException("Each order item quantity must be at least 1");
+            }
             MenuItem menuItem = menuItemMap.get(itemReq.getMenuItemId());
             if (menuItem == null) {
                 throw new ResourceNotFoundException("MenuItem", "id", itemReq.getMenuItemId());

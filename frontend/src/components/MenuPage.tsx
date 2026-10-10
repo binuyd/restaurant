@@ -10,6 +10,7 @@ export const MenuPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [addedNotice, setAddedNotice] = useState<number | null>(null);
 
@@ -31,6 +32,7 @@ export const MenuPage: React.FC = () => {
 
   const fetchMenu = async () => {
     setLoading(true);
+    setLoadError('');
     try {
       const params: any = { availableOnly: true };
       if (selectedCategory) {
@@ -40,6 +42,7 @@ export const MenuPage: React.FC = () => {
       setMenuItems(res.data);
     } catch (err) {
       console.error('Failed to load menu items', err);
+      setLoadError('We could not load the menu. Please check the connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -114,6 +117,11 @@ export const MenuPage: React.FC = () => {
       {loading ? (
         <div className="flex justify-center items-center py-20">
           <div className="spinner"></div>
+        </div>
+      ) : loadError ? (
+        <div className="empty-state">
+          <p className="text-lg text-slate-300">{loadError}</p>
+          <button onClick={fetchMenu} className="btn-secondary mt-4">Try Again</button>
         </div>
       ) : filteredItems.length === 0 ? (
         <div className="empty-state">

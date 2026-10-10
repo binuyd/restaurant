@@ -261,7 +261,7 @@ export const AdminMenuPage: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Wagyu Truffle Burger"
+                  placeholder="e.g. Smoky Bean Burger"
                   className="input-field"
                 />
               </div>

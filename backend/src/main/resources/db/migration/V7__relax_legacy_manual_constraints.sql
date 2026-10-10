@@ -1,6 +1,6 @@
 -- V7__relax_legacy_manual_constraints.sql
-DO $$ 
-BEGIN 
+SELECT 1;
+/*
     -- If line_total exists on order_items, make it nullable or default to 0.00
     IF EXISTS (
         SELECT 1 FROM information_schema.columns 
@@ -46,4 +46,4 @@ BEGIN
         ALTER TABLE orders ALTER COLUMN discount DROP NOT NULL;
     END IF;
 
-END $$;
+*/

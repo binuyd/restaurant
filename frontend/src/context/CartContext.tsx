@@ -16,7 +16,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     const saved = localStorage.getItem('gourmet_cart');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      localStorage.removeItem('gourmet_cart');
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -24,6 +31,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [cart]);
 
   const addToCart = (item: MenuItem, quantity = 1) => {
+    if (!item.available || quantity < 1) return;
     setCart((prevCart) => {
       const existingIndex = prevCart.findIndex((ci) => ci.menuItem.id === item.id);
       if (existingIndex > -1) {
