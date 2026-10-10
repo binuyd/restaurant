@@ -140,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
           ) : (
             <button onClick={onOpenAuth} className="btn-primary flex items-center gap-2">
               <LogIn className="w-4 h-4" />
-              <span>Sign In / Demo</span>
+              <span>Sign In</span>
             </button>
           )}
         </div>

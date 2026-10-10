@@ -50,15 +50,6 @@ const MainContent: React.FC = () => {
       <footer className="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 bg-slate-950/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>© 2026 Gourmet Haven Full Restaurant Management Platform. All rights reserved.</p>
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>Spring Boot 3.3 REST</span>
-            <span>•</span>
-            <span>React + TypeScript</span>
-            <span>•</span>
-            <span>KDS & Table Reservations</span>
-            <span>•</span>
-            <span>In-Person Settlement</span>
-          </div>
         </div>
       </footer>
 
