@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import type { OrderType } from '../types';
 import { api } from '../api/client';
+import './PageLayouts.css';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -79,7 +80,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="drawer-overlay">
+    <div className="drawer-overlay cart-drawer">
       <div className="drawer-content flex flex-col h-full max-w-md w-full">
         {/* Drawer Header */}
         <div className="drawer-header">

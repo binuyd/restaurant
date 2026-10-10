@@ -3,6 +3,7 @@ import { Calendar, Clock, Users, Sparkles, MapPin, CheckCircle, AlertCircle, Hea
 import type { ReservationDto, CreateReservationRequest } from '../types';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import './PageLayouts.css';
 
 export const ReservationPage: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
@@ -105,7 +106,7 @@ export const ReservationPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="reservation-page max-w-5xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">

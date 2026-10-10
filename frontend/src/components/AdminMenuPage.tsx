@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, CheckCircle2, XCircle, Search } from 'lucide-react';
 import type { MenuItem, Category } from '../types';
 import { api } from '../api/client';
+import './PageLayouts.css';
 
 export const AdminMenuPage: React.FC = () => {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -117,7 +118,7 @@ export const AdminMenuPage: React.FC = () => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="admin-page max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">Menu Management</h1>
@@ -148,7 +149,7 @@ export const AdminMenuPage: React.FC = () => {
           <div className="spinner"></div>
         </div>
       ) : (
-        <div className="glass-card overflow-hidden">
+        <div className="admin-table-wrap glass-card overflow-hidden">
           <table className="admin-table">
             <thead>
               <tr>

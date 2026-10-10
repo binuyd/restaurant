@@ -3,6 +3,7 @@ import { ChefHat, Clock, AlertTriangle, CheckCircle2, Play, Check, RefreshCw, Vo
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 import { OrderReceiptModal } from './OrderReceiptModal';
+import './PageLayouts.css';
 
 export const KitchenKdsPage: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);
@@ -53,7 +54,7 @@ export const KitchenKdsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="kds-page max-w-7xl mx-auto px-4 py-8">
       {/* KDS Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
@@ -95,7 +96,7 @@ export const KitchenKdsPage: React.FC = () => {
           <h3 className="text-xl font-bold text-slate-200">Kitchen Queue is Clear!</h3>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="kds-order-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {orders.map((order) => {
             const elapsed = calculateMinutesElapsed(order.createdAt);
             const isUrgent = elapsed > 20;

@@ -1,0 +1,199 @@
+/* Scoped layouts for non-menu pages. Functional styling stays in each component. */
+.reservation-page,
+.orders-page,
+.admin-page,
+.kds-page {
+  width: min(100% - 2rem, 1440px);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
+}
+
+.reservation-page > header,
+.orders-page > header,
+.admin-page > header,
+.kds-page > header {
+  margin-bottom: 1.5rem;
+}
+
+.reservation-page .page-heading,
+.orders-page .page-heading,
+.admin-page .page-heading,
+.kds-page .page-heading {
+  min-width: 0;
+}
+
+.reservation-page .page-heading h1,
+.orders-page .page-heading h1,
+.admin-page .page-heading h1,
+.kds-page .page-heading h1 {
+  overflow-wrap: anywhere;
+}
+
+.reservation-page .glass-card,
+.orders-page .glass-card,
+.admin-page .glass-card,
+.kds-page .glass-card {
+  min-width: 0;
+}
+
+.reservation-page .input-field,
+.admin-page .input-field {
+  min-height: 2.75rem;
+}
+
+.reservation-page .btn-primary,
+.reservation-page .btn-secondary,
+.orders-page .btn-primary,
+.orders-page .btn-secondary,
+.admin-page .btn-primary,
+.admin-page .btn-secondary,
+.kds-page .btn-primary,
+.kds-page .btn-secondary {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  white-space: normal;
+}
+
+.reservation-page .reservation-grid,
+.admin-page .admin-toolbar,
+.orders-page .order-card-header,
+.kds-page .kds-toolbar {
+  min-width: 0;
+}
+
+.orders-page .order-card-header {
+  gap: 1rem;
+}
+
+.orders-page .order-card-header > * {
+  min-width: 0;
+}
+
+.orders-page .order-items-preview,
+.orders-page .audit-trail-container {
+  overflow-wrap: anywhere;
+}
+
+.kds-page .kds-order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.kds-page .kds-order-card {
+  min-width: 0;
+}
+
+.admin-page .admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-page .admin-table-wrap .admin-table {
+  min-width: 680px;
+}
+
+.cart-drawer .drawer-content,
+.auth-modal .modal-card,
+.dish-details-modal .modal-card,
+.receipt-modal .receipt-modal-wrapper {
+  min-width: 0;
+}
+
+.cart-drawer .drawer-footer,
+.auth-modal .modal-card,
+.dish-details-modal .modal-card {
+  overflow-wrap: anywhere;
+}
+
+.cart-drawer .drawer-footer .btn-primary,
+.auth-modal .btn-primary {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  white-space: normal;
+}
+
+.receipt-modal .receipt-actions-bar {
+  gap: 0.5rem;
+}
+
+.receipt-modal .printable-receipt {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .reservation-page,
+  .orders-page,
+  .admin-page,
+  .kds-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .reservation-page .page-heading,
+  .orders-page .page-heading,
+  .admin-page .page-heading,
+  .kds-page .page-heading {
+    width: 100%;
+  }
+
+  .reservation-page .page-heading h1,
+  .orders-page .page-heading h1,
+  .admin-page .page-heading h1,
+  .kds-page .page-heading h1 {
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
+    line-height: 1.05;
+  }
+
+  .reservation-page .glass-card,
+  .orders-page .glass-card,
+  .admin-page .glass-card,
+  .kds-page .glass-card {
+    padding: 1rem;
+  }
+
+  .orders-page .order-card-header {
+    align-items: stretch;
+  }
+
+  .orders-page .order-card-header > div:last-child {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .orders-page .order-card-header > div:last-child > * {
+    min-height: 2.5rem;
+  }
+
+  .kds-page .kds-order-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-drawer .drawer-header,
+  .cart-drawer .drawer-body,
+  .cart-drawer .drawer-footer {
+    padding: 1rem;
+  }
+
+  .auth-modal .modal-card,
+  .dish-details-modal .modal-card {
+    padding: 1rem;
+  }
+
+  .receipt-modal-overlay {
+    align-items: flex-start;
+    padding: 0.75rem;
+  }
+
+  .receipt-modal .printable-receipt {
+    padding: 1.25rem 1rem;
+  }
+}

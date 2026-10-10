@@ -3,6 +3,7 @@ import { X, Star, MessageSquare, Send, CheckCircle2, AlertCircle } from 'lucide-
 import type { MenuItem, ReviewDto } from '../types';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import './PageLayouts.css';
 
 interface DishDetailsModalProps {
   item: MenuItem | null;
@@ -87,7 +88,7 @@ export const DishDetailsModal: React.FC<DishDetailsModalProps> = ({
     : '5.0';
 
   return (
-    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div className="modal-overlay dish-details-modal" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal-card max-w-2xl w-full p-0 overflow-hidden" style={{ maxHeight: '92vh', overflowY: 'auto' }}>
         {/* Header Image */}
         <div className="relative h-64 w-full overflow-hidden bg-slate-900">

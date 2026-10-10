@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, LogIn, UserPlus, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import './PageLayouts.css';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -38,7 +39,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div className="modal-overlay auth-modal" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal-card max-w-md w-full">
         <button onClick={onClose} className="modal-close-btn">
           <X className="w-5 h-5" />

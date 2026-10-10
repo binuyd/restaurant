@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Users, MapPin, CheckCircle, XCircle, Search, RefreshCw, UserCheck, Plus, AlertCircle } from 'lucide-react';
 import type { ReservationDto, ReservationStatus } from '../types';
 import { api } from '../api/client';
+import './PageLayouts.css';
 
 export const AdminReservationsPage: React.FC = () => {
   const [reservations, setReservations] = useState<ReservationDto[]>([]);
@@ -93,7 +94,7 @@ export const AdminReservationsPage: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="admin-page max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>

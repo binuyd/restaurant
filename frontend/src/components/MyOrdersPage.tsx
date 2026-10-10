@@ -3,6 +3,7 @@ import { RefreshCw, Clock, XCircle, CheckCircle2, AlertCircle, ChevronDown, Chev
 import type { OrderDto, OrderStatus } from '../types';
 import { api } from '../api/client';
 import { OrderReceiptModal } from './OrderReceiptModal';
+import './PageLayouts.css';
 
 export const MyOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<OrderDto[]>([]);
@@ -60,7 +61,7 @@ export const MyOrdersPage: React.FC = () => {
   const steps: OrderStatus[] = ['PLACED', 'CONFIRMED', 'PREPARING', 'READY', 'COMPLETED'];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="orders-page max-w-5xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-100">My Orders & Live Status</h1>
