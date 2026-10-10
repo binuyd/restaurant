@@ -41,7 +41,6 @@ public class AuthDtos {
         @Size(min = 6, max = 50, message = "Password must be at least 6 characters")
         private String password;
 
-        private Role role; // Defaults to CUSTOMER if null
     }
 
     @Data

@@ -6,9 +6,8 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string, role?: 'CUSTOMER' | 'ADMIN') => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
-  quickLogin: (role: 'CUSTOMER' | 'ADMIN') => Promise<void>;
   isAuthenticated: boolean;
   isAdmin: boolean;
 }
@@ -37,17 +36,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     saveAuthSession(res.data);
   };
 
-  const register = async (name: string, email: string, password: string, role: 'CUSTOMER' | 'ADMIN' = 'CUSTOMER') => {
-    const res = await api.post<AuthResponse>('/auth/register', { name, email, password, role });
+  const register = async (name: string, email: string, password: string) => {
+    const res = await api.post<AuthResponse>('/auth/register', { name, email, password });
     saveAuthSession(res.data);
-  };
-
-  const quickLogin = async (role: 'CUSTOMER' | 'ADMIN') => {
-    if (role === 'ADMIN') {
-      await login('admin@gourmet.com', 'admin123');
-    } else {
-      await login('customer@gourmet.com', 'customer123');
-    }
   };
 
   const logout = () => {
@@ -65,7 +56,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         register,
         logout,
-        quickLogin,
         isAuthenticated: !!token && !!user,
         isAdmin: user?.role === 'ADMIN',
       }}

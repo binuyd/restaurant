@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, LogIn, UserPlus, ShieldAlert, CheckCircle } from 'lucide-react';
+import { X, LogIn, UserPlus, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 interface AuthModalProps {
@@ -8,12 +8,11 @@ interface AuthModalProps {
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
-  const { login, register, quickLogin } = useAuth();
+  const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'CUSTOMER' | 'ADMIN'>('CUSTOMER');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -26,26 +25,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
     try {
       if (isRegister) {
-        await register(name, email, password, role);
+        await register(name, email, password);
       } else {
         await login(email, password);
       }
       onClose();
     } catch (err: any) {
       setError(err.response?.data?.message || 'Authentication failed. Please check your credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuick = async (targetRole: 'CUSTOMER' | 'ADMIN') => {
-    setError('');
-    setLoading(true);
-    try {
-      await quickLogin(targetRole);
-      onClose();
-    } catch (err: any) {
-      setError('Quick login failed. Make sure backend is running.');
     } finally {
       setLoading(false);
     }
@@ -75,38 +61,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <span>{error}</span>
           </div>
         )}
-
-        {/* Quick Demo Options */}
-        <div className="demo-section mb-6">
-          <p className="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-2 text-center">
-            ⚡ Quick Demo Auto-Login
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => handleQuick('CUSTOMER')}
-              className="btn-demo-card customer"
-            >
-              <CheckCircle className="w-4 h-4 text-emerald-400 mb-1" />
-              <span className="font-semibold text-xs text-slate-200">Customer Demo</span>
-              <span className="text-[10px] text-slate-400">customer@gourmet.com</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuick('ADMIN')}
-              className="btn-demo-card admin"
-            >
-              <CheckCircle className="w-4 h-4 text-amber-400 mb-1" />
-              <span className="font-semibold text-xs text-slate-200">Admin Demo</span>
-              <span className="text-[10px] text-slate-400">admin@gourmet.com</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="divider-text mb-6">
-          <span>or use your email</span>
-        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {isRegister && (
@@ -147,19 +101,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             />
           </div>
 
-          {isRegister && (
-            <div>
-              <label className="input-label">Account Role</label>
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value as 'CUSTOMER' | 'ADMIN')}
-                className="input-field"
-              >
-                <option value="CUSTOMER">Customer</option>
-                <option value="ADMIN">Restaurant Admin</option>
-              </select>
-            </div>
-          )}
 
           <button
             type="submit"
