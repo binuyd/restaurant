@@ -27,25 +27,27 @@ public class AuthService {
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new BadRequestException("Email is already registered: " + request.getEmail());
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
+        if (userRepository.existsByEmailIgnoreCase(normalizedEmail)) {
+            throw new BadRequestException("Email is already registered: " + normalizedEmail);
         }
 
         User user = User.builder()
-                .name(request.getName())
-                .email(request.getEmail())
+                .name(request.getName().trim())
+                .email(normalizedEmail)
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .role(Role.CUSTOMER)
                 .build();
 
         userRepository.save(user);
 
-        return login(new LoginRequest(request.getEmail(), request.getPassword()));
+        return login(new LoginRequest(normalizedEmail, request.getPassword()));
     }
 
     public AuthResponse login(LoginRequest request) {
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(normalizedEmail, request.getPassword())
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

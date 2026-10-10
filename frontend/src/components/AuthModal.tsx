@@ -25,9 +25,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
     try {
       if (isRegister) {
-        await register(name, email, password);
+        await register(name.trim(), email.trim(), password);
       } else {
-        await login(email, password);
+        await login(email.trim(), password);
       }
       onClose();
     } catch (err: any) {
