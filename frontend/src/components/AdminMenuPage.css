@@ -1,14 +1,263 @@
-.admin-menu-page { width: min(100% - 2rem, 1200px); margin: 0 auto; padding: clamp(1.5rem,4vw,3rem) 0; color: #f8fafc; }
-.admin-menu-page .admin-menu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-.admin-menu-page .admin-table-wrap { width: 100%; overflow-x: auto; background: rgba(21,27,41,.96); border: 1px solid rgba(255,255,255,.1); border-radius: 9px; }
-.admin-menu-page .admin-table { min-width: 680px; color: #f8fafc; }
-.admin-menu-page .admin-table th { background: #101622; color: #9aa8bb; border-color: rgba(255,255,255,.1); }
-.admin-menu-page .admin-table td { border-color: rgba(255,255,255,.1); }
-.admin-menu-page .input-field { min-height: 2.75rem; background: #101622; border: 1px solid rgba(255,255,255,.1); border-radius: 7px; color: #f8fafc; }
-.admin-menu-page .btn-primary, .admin-menu-page .btn-secondary { min-height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; white-space: normal; text-align: center; }
+/* ============================================================
+   AdminMenuPage — Self-Contained Styles
+   ============================================================ */
+
+.admin-menu-page {
+  --amp-amber: #f59e0b;
+  --amp-bg-card: rgba(18, 24, 38, 0.97);
+  --amp-bg-input: #0f1623;
+  --amp-bg-header: #0e1520;
+  --amp-border: rgba(255, 255, 255, 0.1);
+  --amp-text: #f1f5f9;
+  --amp-muted: #94a3b8;
+  --amp-radius: 10px;
+
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 0 4rem;
+  color: var(--amp-text);
+}
+
+/* ── Page Header ─────────────────────────────────────────────── */
+.admin-menu-page .admin-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--amp-border);
+}
+
+.admin-menu-page .admin-menu-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.admin-menu-page .admin-menu-header p {
+  font-size: 0.85rem;
+  color: var(--amp-muted);
+  margin-top: 0.3rem;
+}
+
+/* ── Button Styles ───────────────────────────────────────────── */
+.admin-menu-page .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0b0f19;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  transition: all 0.15s;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.admin-menu-page .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.38);
+}
+
+.admin-menu-page .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--amp-text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--amp-border);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.admin-menu-page .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Table Wrapper ───────────────────────────────────────────── */
+.admin-menu-page .admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--amp-bg-card);
+  border: 1px solid var(--amp-border);
+  border-radius: var(--amp-radius);
+}
+
+/* ── Table ───────────────────────────────────────────────────── */
+.admin-menu-page .admin-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: var(--amp-text);
+}
+
+.admin-menu-page .admin-table th {
+  padding: 0.9rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--amp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  background: var(--amp-bg-header);
+  border-bottom: 1px solid var(--amp-border);
+  white-space: nowrap;
+}
+
+.admin-menu-page .admin-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+.admin-menu-page .admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-menu-page .admin-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* ── Input Fields ─────────────────────────────────────────────── */
+.admin-menu-page .input-field,
+.admin-menu-page .input-label {
+  /* modal form uses these — scoped to admin-menu-page */
+  display: block;
+}
+
+.admin-menu-page .input-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--amp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.admin-menu-page .input-field {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 0.85rem;
+  background: var(--amp-bg-input);
+  border: 1px solid var(--amp-border);
+  border-radius: 7px;
+  color: var(--amp-text);
+  font-size: 0.875rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.admin-menu-page .input-field:focus {
+  border-color: var(--amp-amber);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+.admin-menu-page .input-field::placeholder {
+  color: #475569;
+}
+
+/* ── Thumbnail Image in Table ─────────────────────────────────── */
+.admin-menu-page .admin-table td img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--amp-border);
+}
+
+/* ── Availability Toggle ──────────────────────────────────────── */
+.admin-menu-page .toggle-avail-btn {
+  min-height: 2.1rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.73rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid;
+}
+
+.admin-menu-page .toggle-avail-btn.available {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.admin-menu-page .toggle-avail-btn.available:hover {
+  background: rgba(16, 185, 129, 0.22);
+}
+
+.admin-menu-page .toggle-avail-btn.unavailable {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.admin-menu-page .toggle-avail-btn.unavailable:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+/* ── Spinner ─────────────────────────────────────────────────── */
+.admin-menu-page .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(245, 158, 11, 0.15);
+  border-top-color: #f59e0b;
+  border-radius: 50%;
+  animation: ampSpin 0.7s linear infinite;
+}
+
+@keyframes ampSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Modal Overrides (scoped) ─────────────────────────────────── */
+.admin-menu-page-modal .modal-card {
+  width: min(100%, 560px);
+  background: #111827;
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  border-radius: 12px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .admin-menu-page { width: calc(100% - 2rem); padding: 1.5rem 0 2.5rem; }
-  .admin-menu-page .admin-menu-header { flex-direction: column; align-items: stretch; }
-  .admin-menu-page h1 { font-size: clamp(1.7rem,8vw,2.35rem); line-height: 1.05; }
-  .admin-menu-page .admin-menu-header > button { width: 100%; }
+  .admin-menu-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .admin-menu-page .admin-menu-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-menu-page .admin-menu-header > button {
+    width: 100%;
+  }
 }

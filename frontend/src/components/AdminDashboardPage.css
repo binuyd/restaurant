@@ -1,10 +1,188 @@
-.admin-dashboard-page { width:min(100% - 2rem,1200px); margin:0 auto; padding:clamp(1.5rem,4vw,3rem) 0; color:#f8fafc; }
-.admin-dashboard-page .dashboard-header { margin-bottom:1.5rem; }
-.admin-dashboard-page .metric-card, .admin-dashboard-page .chart-card, .admin-dashboard-page .leaderboard { min-width:0; background:rgba(21,27,41,.96); border:1px solid rgba(255,255,255,.1); border-radius:9px; }
-.admin-dashboard-page .admin-table { min-width:600px; }
-.admin-dashboard-page .chart-card { overflow:hidden; }
-@media (max-width:768px) {
- .admin-dashboard-page { width:calc(100% - 2rem); padding:1.5rem 0 2.5rem; }
- .admin-dashboard-page h1 { font-size:clamp(1.7rem,8vw,2.35rem); line-height:1.05; }
- .admin-dashboard-page .leaderboard { overflow-x:auto; }
+/* ============================================================
+   AdminDashboardPage — Self-Contained Styles
+   ============================================================ */
+
+.admin-dashboard-page {
+  --dp-amber: #f59e0b;
+  --dp-bg-card: rgba(18, 24, 38, 0.97);
+  --dp-border: rgba(255, 255, 255, 0.1);
+  --dp-text: #f1f5f9;
+  --dp-muted: #94a3b8;
+  --dp-radius: 10px;
+
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 0 4rem;
+  color: var(--dp-text);
+}
+
+/* ── Page Header ─────────────────────────────────────────────── */
+.admin-dashboard-page .dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--dp-border);
+}
+
+.admin-dashboard-page .dashboard-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.admin-dashboard-page .dashboard-header p {
+  font-size: 0.875rem;
+  color: var(--dp-muted);
+  margin-top: 0.35rem;
+}
+
+/* ── KPI Metric Cards ────────────────────────────────────────── */
+.admin-dashboard-page .metric-card {
+  padding: 1.35rem 1.25rem;
+  background: var(--dp-bg-card);
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  min-width: 0;
+  transition: border-color 0.2s;
+}
+
+.admin-dashboard-page .metric-card:hover {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.admin-dashboard-page .metric-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.admin-dashboard-page .metric-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.admin-dashboard-page .metric-sub {
+  font-size: 0.72rem;
+  color: var(--dp-muted);
+  opacity: 0.75;
+}
+
+.admin-dashboard-page .metric-icon-bg {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Chart Cards ─────────────────────────────────────────────── */
+.admin-dashboard-page .chart-card {
+  padding: 1.35rem 1.25rem;
+  background: var(--dp-bg-card);
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.admin-dashboard-page .chart-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+/* ── Leaderboard Table Section ───────────────────────────────── */
+.admin-dashboard-page .leaderboard {
+  background: var(--dp-bg-card);
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  padding: 1.5rem;
+}
+
+.admin-dashboard-page .leaderboard h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.admin-dashboard-page .admin-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: var(--dp-text);
+}
+
+.admin-dashboard-page .admin-table thead tr {
+  background: #0f1623;
+}
+
+.admin-dashboard-page .admin-table th {
+  padding: 0.85rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--dp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 1px solid var(--dp-border);
+  white-space: nowrap;
+}
+
+.admin-dashboard-page .admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.admin-dashboard-page .admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-dashboard-page .admin-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-dashboard-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .admin-dashboard-page .dashboard-header {
+    flex-direction: column;
+  }
+
+  .admin-dashboard-page .dashboard-header h1 {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+
+  .admin-dashboard-page .leaderboard {
+    overflow-x: auto;
+    padding: 1rem;
+  }
 }

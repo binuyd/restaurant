@@ -1,13 +1,247 @@
-.kds-page { width:min(100% - 2rem,1440px); margin:0 auto; padding:clamp(1.5rem,4vw,3rem) 0; color:#f8fafc; }
-.kds-page .kds-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
-.kds-page .kds-order-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
-.kds-page .kds-order-card { min-width:0; overflow-wrap:anywhere; background:rgba(21,27,41,.96); border:1px solid rgba(255,255,255,.1); border-radius:9px; }
-.kds-page .kds-order-card button { min-height:2.5rem; min-width:0; white-space:normal; text-align:center; }
-@media (max-width:768px) {
- .kds-page { width:calc(100% - 2rem); padding:1.5rem 0 2.5rem; }
- .kds-page .kds-header { flex-direction:column; align-items:stretch; }
- .kds-page .kds-header > div:last-child { display:flex; flex-wrap:wrap; }
- .kds-page .kds-header button { flex:1 1 10rem; }
- .kds-page h1 { font-size:clamp(1.7rem,8vw,2.35rem); line-height:1.05; }
- .kds-page .kds-order-grid { grid-template-columns:1fr; }
+/* ============================================================
+   KitchenKdsPage — Self-Contained Styles
+   ============================================================ */
+
+.kds-page {
+  --kds-amber: #f59e0b;
+  --kds-amber-dim: rgba(245, 158, 11, 0.12);
+  --kds-bg-card: rgba(18, 24, 38, 0.97);
+  --kds-border: rgba(255, 255, 255, 0.1);
+  --kds-text: #f1f5f9;
+  --kds-muted: #94a3b8;
+  --kds-radius: 10px;
+
+  width: min(100% - 2rem, 1440px);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 0 4rem;
+  color: var(--kds-text);
+}
+
+/* ── Page Header ─────────────────────────────────────────────── */
+.kds-page .kds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--kds-border);
+}
+
+.kds-page .kds-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.kds-page .kds-header p {
+  font-size: 0.85rem;
+  color: var(--kds-muted);
+  margin-top: 0.3rem;
+}
+
+/* ── Status Tabs / Filter Buttons ────────────────────────────── */
+.kds-page .kds-header > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ── Order Grid ──────────────────────────────────────────────── */
+.kds-page .kds-order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+/* ── Order Card ──────────────────────────────────────────────── */
+.kds-page .kds-order-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  background: var(--kds-bg-card);
+  border: 1px solid var(--kds-border);
+  border-radius: var(--kds-radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.kds-page .kds-order-card:hover {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Card Header */
+.kds-page .kds-order-card .card-header {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--kds-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.kds-page .kds-order-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+/* Card Body */
+.kds-page .kds-order-card .card-body {
+  padding: 0.85rem 1rem;
+}
+
+.kds-page .kds-order-card p {
+  font-size: 0.8rem;
+  color: var(--kds-muted);
+  margin: 0 0 0.25rem;
+  line-height: 1.5;
+}
+
+.kds-page .kds-order-card .order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  font-size: 0.82rem;
+  color: #e2e8f0;
+}
+
+.kds-page .kds-order-card .order-item-row:last-child {
+  border-bottom: none;
+}
+
+.kds-page .kds-order-card .order-item-name {
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+}
+
+.kds-page .kds-order-card .order-item-qty {
+  font-weight: 700;
+  color: var(--kds-amber);
+  flex-shrink: 0;
+}
+
+/* Card Footer / Buttons */
+.kds-page .kds-order-card .card-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--kds-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kds-page .kds-order-card button {
+  min-height: 2.5rem;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+/* ── Timer / Elapsed Badge ───────────────────────────────────── */
+.kds-page .elapsed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.kds-page .elapsed-badge.normal {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.kds-page .elapsed-badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--kds-amber);
+}
+
+.kds-page .elapsed-badge.urgent {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+/* ── Spinner ─────────────────────────────────────────────────── */
+.kds-page .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(245, 158, 11, 0.15);
+  border-top-color: #f59e0b;
+  border-radius: 50%;
+  animation: kdsSpin 0.7s linear infinite;
+}
+
+@keyframes kdsSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Refresh Button ──────────────────────────────────────────── */
+.kds-page .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--kds-text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--kds-border);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.kds-page .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .kds-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .kds-page .kds-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kds-page .kds-header > div:last-child {
+    flex-wrap: wrap;
+  }
+
+  .kds-page .kds-header > div:last-child > button {
+    flex: 1 1 10rem;
+  }
+
+  .kds-page .kds-order-grid {
+    grid-template-columns: 1fr;
+  }
 }

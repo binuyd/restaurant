@@ -1,4 +1,270 @@
-.dish-details-modal .modal-card { width:min(100%,720px); min-width:0; max-height:92vh; overflow-y:auto; background:#111827; color:#f8fafc; border:1px solid rgba(245,158,11,.18); border-radius:12px; }
-.dish-details-modal .input-field { min-height:2.6rem; background:#101622; border:1px solid rgba(255,255,255,.1); border-radius:7px; color:#f8fafc; }
-.dish-details-modal button { min-width:0; white-space:normal; }
-@media (max-width:520px) { .dish-details-modal { padding:.75rem; align-items:flex-start; overflow-y:auto; } .dish-details-modal .modal-card { margin:auto 0; } }
+/* ============================================================
+   DishDetailsModal — Self-Contained Styles
+   ============================================================ */
+
+.dish-details-modal {
+  --ddm-amber: #f59e0b;
+  --ddm-amber-dim: rgba(245, 158, 11, 0.12);
+  --ddm-amber-border: rgba(245, 158, 11, 0.25);
+  --ddm-bg: #111827;
+  --ddm-bg-input: #0f1623;
+  --ddm-border: rgba(255, 255, 255, 0.1);
+  --ddm-text: #f1f5f9;
+  --ddm-muted: #94a3b8;
+  --ddm-radius: 12px;
+}
+
+/* ── Modal Card ──────────────────────────────────────────────── */
+.dish-details-modal .modal-card {
+  width: min(100%, 720px);
+  min-width: 0;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--ddm-bg);
+  color: var(--ddm-text);
+  border: 1px solid var(--ddm-amber-border);
+  border-radius: var(--ddm-radius);
+  scroll-behavior: smooth;
+}
+
+/* ── Hero Image ──────────────────────────────────────────────── */
+.dish-details-modal .dish-hero-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Content Area ────────────────────────────────────────────── */
+.dish-details-modal .dish-content {
+  padding: 1.5rem;
+}
+
+/* ── Title Row ───────────────────────────────────────────────── */
+.dish-details-modal .dish-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.dish-details-modal .dish-title-row h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dish-details-modal .dish-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--ddm-amber);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Category Badge ──────────────────────────────────────────── */
+.dish-details-modal .dish-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.dish-details-modal .dish-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  background: var(--ddm-amber-dim);
+  border: 1px solid var(--ddm-amber-border);
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ddm-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Rating Row ──────────────────────────────────────────────── */
+.dish-details-modal .dish-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.dish-details-modal .dish-rating-row .stars {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.dish-details-modal .dish-rating-row .avg-score {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--ddm-amber);
+}
+
+.dish-details-modal .dish-rating-row .review-count {
+  font-size: 0.78rem;
+  color: var(--ddm-muted);
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.dish-details-modal .dish-description {
+  font-size: 0.875rem;
+  color: var(--ddm-muted);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Divider ─────────────────────────────────────────────────── */
+.dish-details-modal .modal-divider {
+  border: none;
+  border-top: 1px solid var(--ddm-border);
+  margin: 1.25rem 0;
+}
+
+/* ── Reviews Section Header ──────────────────────────────────── */
+.dish-details-modal .reviews-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 1rem;
+}
+
+/* ── Review Card ─────────────────────────────────────────────── */
+.dish-details-modal .review-card {
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--ddm-border);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.dish-details-modal .review-card .review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dish-details-modal .review-card .reviewer-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.dish-details-modal .review-card .review-date {
+  font-size: 0.72rem;
+  color: var(--ddm-muted);
+}
+
+.dish-details-modal .review-card .review-body {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Add Review Form ─────────────────────────────────────────── */
+.dish-details-modal .add-review-section {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ddm-border);
+}
+
+.dish-details-modal .add-review-section h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 0.85rem;
+}
+
+.dish-details-modal .input-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ddm-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.dish-details-modal .input-field {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--ddm-bg-input);
+  border: 1px solid var(--ddm-border);
+  border-radius: 7px;
+  color: var(--ddm-text);
+  font-size: 0.875rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dish-details-modal .input-field:focus {
+  border-color: var(--ddm-amber);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+.dish-details-modal .input-field::placeholder {
+  color: #475569;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.dish-details-modal button {
+  min-width: 0;
+  white-space: normal;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+/* ── Star Rating Selector ────────────────────────────────────── */
+.dish-details-modal .star-selector {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.dish-details-modal .star-selector button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .dish-details-modal {
+    padding: 0.75rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .dish-details-modal .modal-card {
+    max-height: none;
+    margin: auto 0;
+  }
+
+  .dish-details-modal .dish-hero-img {
+    height: 180px;
+  }
+
+  .dish-details-modal .dish-content {
+    padding: 1rem;
+  }
+}

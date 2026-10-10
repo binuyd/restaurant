@@ -1,14 +1,325 @@
-.orders-page { width: min(100% - 2rem, 960px); margin: 0 auto; padding: clamp(1.5rem,4vw,3rem) 0; color: #f8fafc; }
-.orders-page .order-card-container { min-width: 0; padding: clamp(1rem,3vw,1.5rem); background: rgba(21,27,41,.96); border: 1px solid rgba(255,255,255,.1); border-radius: 9px; }
-.orders-page .order-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,.1); }
-.orders-page .order-card-header > * { min-width: 0; }
-.orders-page .order-items-preview, .orders-page .audit-trail-container { overflow-wrap: anywhere; border: 1px solid rgba(255,255,255,.1); border-radius: 7px; }
-.orders-page .btn-secondary, .orders-page .btn-cancel { min-height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; white-space: normal; text-align: center; }
-.orders-page .progress-track { background: rgba(255,255,255,.14); }
+/* ============================================================
+   MyOrdersPage — Self-Contained Styles
+   ============================================================ */
+
+.orders-page {
+  --op-amber: #f59e0b;
+  --op-amber-dim: rgba(245, 158, 11, 0.12);
+  --op-bg-card: rgba(18, 24, 38, 0.97);
+  --op-border: rgba(255, 255, 255, 0.1);
+  --op-text: #f1f5f9;
+  --op-muted: #94a3b8;
+  --op-radius: 10px;
+
+  width: min(100% - 2rem, 960px);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 0 4rem;
+  color: var(--op-text);
+}
+
+/* ── Page Header ─────────────────────────────────────────────── */
+.orders-page h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.5rem;
+}
+
+.orders-page > p {
+  font-size: 0.875rem;
+  color: var(--op-muted);
+  margin-bottom: 2rem;
+}
+
+/* ── Order Card Container ────────────────────────────────────── */
+.orders-page .order-card-container {
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--op-bg-card);
+  border: 1px solid var(--op-border);
+  border-radius: var(--op-radius);
+  transition: border-color 0.2s;
+}
+
+.orders-page .order-card-container:hover {
+  border-color: rgba(245, 158, 11, 0.15);
+}
+
+/* ── Card Header ─────────────────────────────────────────────── */
+.orders-page .order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--op-border);
+  margin-bottom: 1rem;
+}
+
+.orders-page .order-card-header > * {
+  min-width: 0;
+}
+
+.orders-page .order-card-header h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 0.3rem;
+}
+
+.orders-page .order-card-header p {
+  font-size: 0.8rem;
+  color: var(--op-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Progress Bar ─────────────────────────────────────────────── */
+.orders-page .progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.orders-page .progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  transition: width 0.4s ease;
+}
+
+/* ── Step Circles ────────────────────────────────────────────── */
+.orders-page .step-circles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0 1rem;
+  position: relative;
+}
+
+.orders-page .step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.orders-page .step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  border: 2px solid var(--op-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--op-muted);
+  transition: all 0.3s;
+}
+
+.orders-page .step-circle.completed {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #34d399;
+}
+
+.orders-page .step-circle.current {
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: #f59e0b !important;
+  color: #f59e0b !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.35);
+}
+
+.orders-page .step-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--op-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ── Order Items Preview ─────────────────────────────────────── */
+.orders-page .order-items-preview {
+  overflow-wrap: anywhere;
+  border: 1px solid var(--op-border);
+  border-radius: 7px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+
+.orders-page .order-items-preview .item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.83rem;
+}
+
+.orders-page .order-items-preview .item-row:last-child {
+  border-bottom: none;
+}
+
+.orders-page .order-items-preview .item-name {
+  color: #e2e8f0;
+  font-weight: 500;
+  flex: 1;
+}
+
+.orders-page .order-items-preview .item-qty {
+  color: var(--op-muted);
+  font-size: 0.75rem;
+}
+
+.orders-page .order-items-preview .item-price {
+  color: var(--op-amber);
+  font-weight: 700;
+  font-size: 0.83rem;
+  white-space: nowrap;
+}
+
+/* ── Audit Trail ─────────────────────────────────────────────── */
+.orders-page .audit-trail-container {
+  overflow-wrap: anywhere;
+  border: 1px solid var(--op-border);
+  border-radius: 7px;
+  padding: 0.75rem;
+}
+
+.orders-page .audit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  font-size: 0.78rem;
+}
+
+.orders-page .audit-item:last-child {
+  border-bottom: none;
+}
+
+.orders-page .audit-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.orders-page .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--op-text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--op-border);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.orders-page .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.orders-page .btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.orders-page .btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* ── Spinner ─────────────────────────────────────────────────── */
+.orders-page .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(245, 158, 11, 0.15);
+  border-top-color: #f59e0b;
+  border-radius: 50%;
+  animation: opSpin 0.7s linear infinite;
+}
+
+@keyframes opSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Empty State ─────────────────────────────────────────────── */
+.orders-page .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1rem;
+  text-align: center;
+}
+
+.orders-page .empty-state p {
+  font-size: 1rem;
+  color: var(--op-muted);
+  line-height: 1.6;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .orders-page { width: calc(100% - 2rem); padding: 1.5rem 0 2.5rem; }
-  .orders-page h1 { font-size: clamp(1.7rem,8vw,2.35rem); line-height: 1.05; }
-  .orders-page .order-card-header { flex-direction: column; align-items: stretch; }
-  .orders-page .order-card-header > div:last-child { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
-  .orders-page .order-card-header > div:last-child > * { min-height: 2.5rem; }
+  .orders-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .orders-page .order-card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orders-page .order-card-header > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .orders-page .order-card-header > div:last-child > * {
+    min-height: 2.5rem;
+  }
+
+  .orders-page .step-label {
+    font-size: 0.55rem;
+  }
 }
