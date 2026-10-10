@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut } from 'lucide-react';
+import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
@@ -11,14 +11,20 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpenCart, onOpenAuth }) => {
-  const { user, isAuthenticated, isAdmin, logout, quickLogin } = useAuth();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const { totalItemsCount } = useCart();
+  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
+
+  const navigate = (tab: string) => {
+    setCurrentTab(tab);
+    setIsMobileNavOpen(false);
+  };
 
   return (
     <header className="navbar-container">
       <div className="navbar-inner">
         {/* Brand */}
-        <div className="brand" onClick={() => setCurrentTab('menu')}>
+        <div className="brand" onClick={() => navigate('menu')}>
           <div className="brand-logo">
             <Utensils className="w-6 h-6 text-amber-400" />
           </div>
@@ -29,9 +35,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="nav-links">
+        <button
+          type="button"
+          className="mobile-nav-toggle"
+          onClick={() => setIsMobileNavOpen((open) => !open)}
+          aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMobileNavOpen}
+        >
+          {isMobileNavOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+        </button>
+
+        <nav className={`nav-links ${isMobileNavOpen ? 'open' : ''}`}>
           <button
-            onClick={() => setCurrentTab('menu')}
+            onClick={() => navigate('menu')}
             className={`nav-btn ${currentTab === 'menu' ? 'active' : ''}`}
           >
             <MenuIcon className="w-4 h-4 mr-2 inline" />
@@ -40,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
 
           {isAuthenticated && (
             <button
-              onClick={() => setCurrentTab('my-orders')}
+              onClick={() => navigate('my-orders')}
               className={`nav-btn ${currentTab === 'my-orders' ? 'active' : ''}`}
             >
               <ListOrdered className="w-4 h-4 mr-2 inline" />
@@ -51,21 +67,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
           {isAdmin && (
             <>
               <button
-                onClick={() => setCurrentTab('admin-orders')}
+                onClick={() => navigate('admin-orders')}
                 className={`nav-btn admin ${currentTab === 'admin-orders' ? 'active' : ''}`}
               >
                 <ListOrdered className="w-4 h-4 mr-2 inline" />
                 Orders Board
               </button>
               <button
-                onClick={() => setCurrentTab('admin-menu')}
+                onClick={() => navigate('admin-menu')}
                 className={`nav-btn admin ${currentTab === 'admin-menu' ? 'active' : ''}`}
               >
                 <MenuIcon className="w-4 h-4 mr-2 inline" />
                 Menu Management
               </button>
               <button
-                onClick={() => setCurrentTab('admin-dashboard')}
+                onClick={() => navigate('admin-dashboard')}
                 className={`nav-btn admin ${currentTab === 'admin-dashboard' ? 'active' : ''}`}
               >
                 <LayoutDashboard className="w-4 h-4 mr-2 inline" />
@@ -76,27 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
         </nav>
 
         {/* Right Actions: Cart & Auth */}
-        <div className="flex items-center gap-3">
-          {/* Quick Demo Switcher */}
-          {!isAuthenticated && (
-            <div className="demo-pills hidden md:flex items-center gap-2 mr-2">
-              <button
-                onClick={() => quickLogin('CUSTOMER')}
-                className="btn-demo customer"
-                title="Quick login as Customer"
-              >
-                Demo Customer
-              </button>
-              <button
-                onClick={() => quickLogin('ADMIN')}
-                className="btn-demo admin"
-                title="Quick login as Admin"
-              >
-                Demo Admin
-              </button>
-            </div>
-          )}
-
+        <div className="navbar-actions flex items-center gap-3">
           {/* Cart Button */}
           <button onClick={onOpenCart} className="cart-btn">
             <ShoppingBag className="w-5 h-5 text-amber-400" />
