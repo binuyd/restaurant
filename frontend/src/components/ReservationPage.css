@@ -1,26 +1,163 @@
 .reservation-page {
-  width: min(100% - 2rem, 960px);
+  width: min(100% - 2rem, 1080px);
   margin: 0 auto;
-  padding: clamp(1.5rem, 4vw, 3rem) 0;
+  padding: clamp(1.5rem, 5vw, 4rem) 0;
   color: #f8fafc;
 }
-.reservation-page .reservation-form,
-.reservation-page .reservation-success,
-.reservation-page .reservation-list {
-  width: 100%;
-  min-width: 0;
+
+.reservation-page .booking-header {
+  max-width: 760px;
+  margin: 0 auto 2rem;
 }
-.reservation-page .input-label { color: #9aa8bb; }
-.reservation-page .input-field { min-height: 2.75rem; background: #101622; border: 1px solid rgba(255,255,255,.1); border-radius: 7px; color: #f8fafc; }
-.reservation-page .input-field:focus { border-color: #f59e0b; outline: none; }
-.reservation-page .btn-primary,
-.reservation-page .btn-secondary { min-height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; white-space: normal; text-align: center; }
-.reservation-page .glass-card,
-.reservation-page .order-card-container { background: rgba(21,27,41,.96); border: 1px solid rgba(255,255,255,.1); border-radius: 9px; }
-.reservation-page .seating-option { min-height: 5.25rem; }
+
+.reservation-page .booking-header h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.reservation-page .booking-tabs > div {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: #101622;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+}
+
+.reservation-page .booking-tabs button {
+  min-height: 2.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  white-space: normal;
+}
+
+.reservation-page .booking-card,
+.reservation-page .booking-success,
+.reservation-page .booking-list .order-card-container {
+  background: rgba(21,27,41,.97);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.2);
+}
+
+.reservation-page .booking-card {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.reservation-page .booking-card form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.reservation-page .input-label {
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  margin-bottom: 0.45rem;
+  color: #a7b3c5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.reservation-page .input-field {
+  width: 100%;
+  min-height: 2.8rem;
+  background: #101622;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 7px;
+  color: #f8fafc;
+}
+
+.reservation-page .input-field:focus {
+  border-color: #f59e0b;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245,158,11,.1);
+}
+
+.reservation-page .booking-time-grid button {
+  min-height: 2.6rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 6px;
+  color: #cbd5e1;
+  background: #101622;
+}
+
+.reservation-page .booking-time-grid button:hover,
+.reservation-page .booking-seating-grid > div:hover {
+  border-color: rgba(245,158,11,.6);
+}
+
+.reservation-page .booking-seating-grid > div {
+  min-height: 5.4rem;
+  padding: 0.9rem;
+  background: rgba(16,22,34,.8);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+}
+
+.reservation-page .booking-contact-grid {
+  align-items: start;
+}
+
+.reservation-page .booking-submit button {
+  min-height: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  white-space: normal;
+  text-align: center;
+}
+
+.reservation-page .booking-success {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.reservation-page .booking-success-actions {
+  flex-wrap: wrap;
+}
+
+.reservation-page .booking-success-actions button {
+  min-height: 2.6rem;
+  flex: 1 1 12rem;
+  white-space: normal;
+}
+
+.reservation-page .booking-list .order-card-container {
+  padding: 1.25rem;
+}
+
 @media (max-width: 768px) {
-  .reservation-page { width: calc(100% - 2rem); padding: 1.5rem 0 2.5rem; }
-  .reservation-page h1 { font-size: clamp(1.7rem, 8vw, 2.35rem); line-height: 1.05; }
-  .reservation-page .glass-card { padding: 1rem; }
-  .reservation-page button { max-width: 100%; }
+  .reservation-page {
+    width: calc(100% - 2rem);
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .reservation-page .booking-header h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+  }
+
+  .reservation-page .booking-tabs button {
+    flex: 1;
+    padding-inline: .65rem;
+  }
+
+  .reservation-page .booking-card,
+  .reservation-page .booking-success {
+    padding: 1rem;
+  }
+
+  .reservation-page .booking-time-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .reservation-page .booking-contact-grid {
+    grid-template-columns: 1fr;
+  }
 }

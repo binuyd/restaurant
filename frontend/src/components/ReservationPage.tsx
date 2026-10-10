@@ -106,15 +106,15 @@ export const ReservationPage: React.FC = () => {
   ];
 
   return (
-    <div className="reservation-page max-w-5xl mx-auto px-4 py-8">
+    <div className="reservation-page">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div className="booking-header text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
           Reserve a table
         </h1>
 
         {/* Tab switcher */}
-        <div className="flex justify-center mt-6">
+        <div className="booking-tabs flex justify-center mt-6">
           <div className="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800">
             <button
               onClick={() => setActiveTab('book')}
@@ -144,7 +144,7 @@ export const ReservationPage: React.FC = () => {
 
       {activeTab === 'book' ? (
         successBooking ? (
-          <div className="glass-card max-w-lg mx-auto p-8 text-center border-amber-500/30">
+          <div className="booking-success glass-card max-w-lg mx-auto p-8 text-center border-amber-500/30">
             <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="w-8 h-8" />
             </div>
@@ -173,7 +173,7 @@ export const ReservationPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 justify-center">
+            <div className="booking-success-actions flex gap-3 justify-center">
               <button
                 onClick={() => {
                   setSuccessBooking(null);
@@ -194,7 +194,7 @@ export const ReservationPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="glass-card max-w-2xl mx-auto p-6 sm:p-8">
+          <div className="booking-card glass-card max-w-2xl mx-auto p-6 sm:p-8">
             {errorMsg && (
               <div className="error-banner mb-6">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
@@ -204,7 +204,7 @@ export const ReservationPage: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Date & Time */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="booking-meta-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="input-label flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-amber-400" />
@@ -245,7 +245,7 @@ export const ReservationPage: React.FC = () => {
                   <Clock className="w-3.5 h-3.5 text-amber-400" />
                   <span>Select Time Slot</span>
                 </label>
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                <div className="booking-time-grid grid grid-cols-3 sm:grid-cols-6 gap-2">
                   {timeSlots.map((time) => (
                     <button
                       key={time}
@@ -269,7 +269,7 @@ export const ReservationPage: React.FC = () => {
                   <MapPin className="w-3.5 h-3.5 text-amber-400" />
                   <span>Preferred Seating Area</span>
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="booking-seating-grid grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {seatingOptions.map((opt) => (
                     <div
                       key={opt.id}
@@ -311,7 +311,7 @@ export const ReservationPage: React.FC = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="booking-contact-grid grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="input-label">Your Name</label>
                   <input
@@ -359,7 +359,7 @@ export const ReservationPage: React.FC = () => {
                 />
               </div>
 
-              <div className="pt-2">
+              <div className="booking-submit pt-2">
                 <button
                   type="submit"
                   disabled={submitting}
@@ -377,7 +377,7 @@ export const ReservationPage: React.FC = () => {
         )
       ) : (
         /* My Bookings List */
-        <div className="space-y-4">
+        <div className="booking-list space-y-4">
           {loadingBookings ? (
             <div className="flex justify-center py-16">
               <div className="spinner"></div>

@@ -121,7 +121,7 @@ export const AdminReservationsPage: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="reservation-filter-bar glass-card p-4 mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      <div className="admin-reservations-filter reservation-filter-bar glass-card p-4 mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         {/* Search */}
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
@@ -188,7 +188,7 @@ export const AdminReservationsPage: React.FC = () => {
             return (
               <div
                 key={res.id}
-                className={`reservation-row glass-card p-4 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 border ${
+                className={`admin-reservation-card reservation-row glass-card p-4 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 border ${
                   isToday ? 'border-amber-500/40 bg-amber-950/10' : 'border-slate-800'
                 }`}
               >
@@ -241,7 +241,7 @@ export const AdminReservationsPage: React.FC = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="admin-reservation-actions flex items-center gap-2 flex-wrap">
                   {res.status === 'CONFIRMED' && (
                     <button
                       onClick={() => handleStatusChange(res.id, 'SEATED')}
@@ -280,7 +280,7 @@ export const AdminReservationsPage: React.FC = () => {
 
       {/* Walk-in Booking Modal */}
       {isWalkInModalOpen && (
-        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setIsWalkInModalOpen(false)}>
+        <div className="walk-in-modal modal-overlay" onClick={(e) => e.target === e.currentTarget && setIsWalkInModalOpen(false)}>
           <div className="modal-card max-w-md w-full">
             <h2 className="text-xl font-bold text-slate-100 mb-4">Register Walk-in Guest Table</h2>
             {walkInError && (

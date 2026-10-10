@@ -23,7 +23,7 @@ const MainContent: React.FC = () => {
   useEffect(() => {
     if (isAdmin && ['menu', 'reservations', 'my-orders'].includes(currentTab)) {
       setCurrentTab('admin-dashboard');
-    } else if (!isAuthenticated && currentTab !== 'menu') {
+    } else if (!isAuthenticated && ['my-orders', 'kitchen-kds', 'admin-orders', 'admin-reservations', 'admin-menu', 'admin-dashboard'].includes(currentTab)) {
       setCurrentTab('menu');
     }
   }, [isAdmin, isAuthenticated, currentTab]);
