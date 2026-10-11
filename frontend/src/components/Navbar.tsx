@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingBag, Utensils, LayoutDashboard, ListOrdered, Menu as MenuIcon, LogIn, LogOut, X, Calendar, ChefHat, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import './Navbar.css';
 
 interface NavbarProps {
   currentTab: string;
@@ -24,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
     <header className="navbar-container">
       <div className="navbar-inner">
         {/* Brand */}
-        <div className="brand" onClick={() => navigate('menu')}>
+        <button type="button" className="brand" onClick={() => navigate('menu')}>
           <div className="brand-logo">
             <Utensils className="w-6 h-6 text-amber-400" />
           </div>
@@ -32,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
             <span className="brand-title">GOURMET</span>
             <span className="brand-subtitle">HAVEN</span>
           </div>
-        </div>
+        </button>
 
         {/* Navigation Tabs */}
         <button
@@ -116,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
         </nav>
 
         {/* Right Actions: Cart & Auth */}
-        <div className="navbar-actions flex items-center gap-3">
+        <div className="navbar-actions">
           {/* Cart Button */}
           {!isAdmin && (
             <button onClick={onOpenCart} className="cart-btn">
@@ -142,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
               </button>
             </div>
           ) : (
-            <button onClick={onOpenAuth} className="btn-primary flex items-center gap-2">
+            <button onClick={onOpenAuth} className="nav-sign-in">
               <LogIn className="w-4 h-4" />
               <span>Sign In</span>
             </button>

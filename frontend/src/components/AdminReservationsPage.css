@@ -18,6 +18,26 @@
   color: var(--rp-text);
 }
 
+.admin-reservations-page .flex { display: flex; }
+.admin-reservations-page .items-center { align-items: center; }
+.admin-reservations-page .justify-between { justify-content: space-between; }
+.admin-reservations-page .gap-2 { gap: .5rem; }
+.admin-reservations-page .gap-3 { gap: .75rem; }
+.admin-reservations-page .mb-6 { margin-bottom: 1.5rem; }
+.admin-reservations-page .relative { position: relative; }
+.admin-reservations-page .modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(3, 7, 18, .8);
+  backdrop-filter: blur(10px);
+}
+
 /* ── Page Header ─────────────────────────────────────────────── */
 .admin-reservations-page .admin-reservations-header {
   display: flex;
@@ -275,4 +295,6 @@
   .admin-reservations-page .admin-reservation-card .admin-reservation-actions button {
     flex: 1 1 8rem;
   }
+
+  .admin-reservations-page .modal-overlay { align-items: flex-start; padding: .75rem; }
 }

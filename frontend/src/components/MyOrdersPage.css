@@ -17,6 +17,16 @@
   color: var(--op-text);
 }
 
+.orders-page .flex { display: flex; }
+.orders-page .items-center { align-items: center; }
+.orders-page .items-start { align-items: flex-start; }
+.orders-page .justify-between { justify-content: space-between; }
+.orders-page .gap-2 { gap: .5rem; }
+.orders-page .gap-3 { gap: .75rem; }
+.orders-page .mb-4 { margin-bottom: 1rem; }
+.orders-page .mb-6 { margin-bottom: 1.5rem; }
+.orders-page .space-y-4 > * + * { margin-top: 1rem; }
+
 /* ── Page Header ─────────────────────────────────────────────── */
 .orders-page h1 {
   font-family: 'Outfit', sans-serif;

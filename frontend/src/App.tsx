@@ -12,6 +12,7 @@ import { AdminOrdersBoard } from './components/AdminOrdersBoard';
 import { AdminReservationsPage } from './components/AdminReservationsPage';
 import { AdminMenuPage } from './components/AdminMenuPage';
 import { AdminDashboardPage } from './components/AdminDashboardPage';
+import './App.css';
 
 const MainContent: React.FC = () => {
   const [currentTab, setCurrentTab] = useState('menu');
@@ -33,7 +34,7 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="app-shell">
       <Navbar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -41,7 +42,7 @@ const MainContent: React.FC = () => {
         onOpenAuth={() => setIsAuthOpen(true)}
       />
 
-      <main className="flex-1">
+      <main className="app-main">
         {currentTab === 'menu' && (
           <MenuPage onNavigateToReservation={() => setCurrentTab('reservations')} />
         )}
@@ -55,8 +56,8 @@ const MainContent: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 bg-slate-950/60 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <footer className="app-footer">
+        <div className="app-footer-inner">
           <p>© 2026 Gourmet Haven Full Restaurant Management Platform. All rights reserved.</p>
         </div>
       </footer>

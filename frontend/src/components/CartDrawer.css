@@ -12,6 +12,29 @@
   --cd-muted: #94a3b8;
 }
 
+.cart-drawer.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  background: rgba(3, 7, 18, .78);
+  backdrop-filter: blur(8px);
+}
+
+.cart-drawer .drawer-close-btn {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--cd-muted);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid var(--cd-border);
+  border-radius: .6rem;
+  cursor: pointer;
+}
+
 /* ── Drawer Container ────────────────────────────────────────── */
 .cart-drawer .drawer-content {
   width: min(100%, 440px);

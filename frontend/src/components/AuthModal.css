@@ -14,6 +14,34 @@
   --am-radius: 12px;
 }
 
+.auth-modal.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(3, 7, 18, .8);
+  backdrop-filter: blur(10px);
+}
+
+.auth-modal .modal-close-btn {
+  position: absolute;
+  top: .8rem;
+  right: .8rem;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  color: var(--am-muted);
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--am-border);
+  border-radius: .55rem;
+  cursor: pointer;
+}
+
 /* ── Modal Card ──────────────────────────────────────────────── */
 .auth-modal .modal-card {
   width: min(100%, 440px);
