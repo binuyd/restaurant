@@ -52,14 +52,10 @@ Orders use in-person settlement, such as cash or payment at the restaurant count
 - Spring Data JPA
 - Spring Security
 - JWT authentication
-- Bean Validation
-- Flyway database migrations
 - Springdoc OpenAPI
 
 ### Database
-
-- H2 for local development and tests
-- PostgreSQL supported for deployment
+- PostgreSQL 
 
 ## Project Structure
 
