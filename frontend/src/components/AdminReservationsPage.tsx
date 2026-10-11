@@ -94,59 +94,57 @@ export const AdminReservationsPage: React.FC = () => {
   });
 
   return (
-    <div className="admin-reservations-page max-w-7xl mx-auto px-4 py-8">
+    <div className="admin-reservations-page">
       {/* Header */}
-      <div className="admin-reservations-header flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+      <div className="admin-reservations-header">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Table Reservations Management</h1>
+          <p className="admin-reservations-eyebrow">Front of house</p>
+          <h1>Table Reservations Management</h1>
+          <p className="admin-reservations-subtitle">Review arrivals, seat guests, and keep tonight's service moving.</p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="admin-reservations-header-actions">
           <button
             onClick={() => setIsWalkInModalOpen(true)}
-            className="btn-primary text-xs flex items-center gap-1.5"
+            className="reservation-button reservation-button-primary"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="reservation-button-icon" />
             <span>New Walk-in Booking</span>
           </button>
 
           <button
             onClick={() => fetchReservations()}
-            className="btn-secondary text-xs flex items-center gap-2"
+            className="reservation-button reservation-button-secondary"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`reservation-button-icon ${loading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
         </div>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="admin-reservations-filter reservation-filter-bar glass-card p-4 mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      <div className="admin-reservations-filter reservation-filter-bar">
         {/* Search */}
-        <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+        <div className="reservation-search">
+          <Search className="reservation-search-icon" />
           <input
             type="text"
             placeholder="Search guest by name, phone, or email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input-field pl-9 py-2 text-xs"
+            className="reservation-input reservation-search-input"
           />
         </div>
 
         {/* Date Filters */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">Date:</span>
-          <div className="inline-flex rounded-lg bg-slate-900 border border-slate-800 p-0.5">
+        <div className="reservation-filter-group">
+          <span className="reservation-filter-label">Date</span>
+          <div className="reservation-segmented-control">
             {['ALL', 'TODAY', 'TOMORROW'].map((df) => (
               <button
                 key={df}
                 onClick={() => setDateFilter(df)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
-                  dateFilter === df
-                    ? 'bg-amber-500 text-slate-950 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
+                className={dateFilter === df ? 'is-active' : ''}
               >
                 {df}
               </button>
@@ -155,12 +153,12 @@ export const AdminReservationsPage: React.FC = () => {
         </div>
 
         {/* Status Filters */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">Status:</span>
+        <label className="reservation-filter-group reservation-status-group">
+          <span className="reservation-filter-label">Status</span>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="input-field py-1.5 px-3 text-xs bg-slate-900 w-auto"
+            className="reservation-input reservation-status-select"
           >
             <option value="ALL">All Statuses</option>
             <option value="CONFIRMED">Confirmed</option>
@@ -168,7 +166,7 @@ export const AdminReservationsPage: React.FC = () => {
             <option value="COMPLETED">Completed</option>
             <option value="CANCELLED">Cancelled</option>
           </select>
-        </div>
+        </label>
       </div>
 
       {/* Reservations Table / Cards */}
@@ -177,27 +175,28 @@ export const AdminReservationsPage: React.FC = () => {
           <div className="spinner"></div>
         </div>
       ) : filteredReservations.length === 0 ? (
-        <div className="glass-card p-8 text-center py-16">
-          <Calendar className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-slate-200">No Reservations Found</h3>
+        <div className="reservation-empty-state">
+          <Calendar className="reservation-empty-icon" />
+          <h3>No Reservations Found</h3>
+          <p>Try changing the date, status, or search filters.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="reservation-list">
           {filteredReservations.map((res) => {
             const isToday = res.reservationDate === todayStr;
             return (
               <div
                 key={res.id}
-                className={`admin-reservation-card reservation-row glass-card p-4 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 border ${
+                className={`admin-reservation-card reservation-row ${
                   isToday ? 'border-amber-500/40 bg-amber-950/10' : 'border-slate-800'
                 }`}
               >
                 {/* Guest Details */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <span className="font-extrabold text-slate-100 text-base">{res.guestName}</span>
+                <div className="reservation-card-content">
+                  <div className="reservation-card-heading">
+                    <span className="reservation-guest-name">{res.guestName}</span>
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                      className={`reservation-status-badge ${
                         res.status === 'CONFIRMED'
                           ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                           : res.status === 'SEATED'
@@ -210,44 +209,44 @@ export const AdminReservationsPage: React.FC = () => {
                       {res.status}
                     </span>
                     {isToday && (
-                      <span className="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-amber-500 text-slate-950">
+                      <span className="reservation-today-badge">
                         TODAY
                       </span>
                     )}
                   </div>
 
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400">
-                    <span className="flex items-center gap-1 text-slate-200 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                  <div className="reservation-meta">
+                    <span className="reservation-meta-item reservation-meta-primary">
+                      <Calendar className="reservation-meta-icon" />
                       {res.reservationDate} at {res.reservationTime}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="reservation-meta-item">
+                      <Users className="reservation-meta-icon" />
                       {res.partySize} Guests
                     </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="reservation-meta-item">
+                      <MapPin className="reservation-meta-icon" />
                       Area: {res.seatingArea}
                     </span>
-                    <span>📞 {res.guestPhone}</span>
-                    <span>✉️ {res.guestEmail}</span>
+                    <span className="reservation-meta-item">{res.guestPhone}</span>
+                    <span className="reservation-meta-item">{res.guestEmail}</span>
                   </div>
 
                   {res.specialRequests && (
-                    <div className="mt-2 text-xs text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20">
+                    <div className="reservation-special-request">
                       <strong>Special Request:</strong> {res.specialRequests}
                     </div>
                   )}
                 </div>
 
                 {/* Actions */}
-                <div className="admin-reservation-actions flex items-center gap-2 flex-wrap">
+                <div className="admin-reservation-actions">
                   {res.status === 'CONFIRMED' && (
                     <button
                       onClick={() => handleStatusChange(res.id, 'SEATED')}
-                      className="btn-primary text-xs py-1.5 px-3 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500"
+                      className="reservation-action reservation-action-seat"
                     >
-                      <UserCheck className="w-3.5 h-3.5" />
+                      <UserCheck className="reservation-action-icon" />
                       <span>Seat Guests</span>
                     </button>
                   )}
@@ -255,9 +254,9 @@ export const AdminReservationsPage: React.FC = () => {
                   {res.status === 'SEATED' && (
                     <button
                       onClick={() => handleStatusChange(res.id, 'COMPLETED')}
-                      className="btn-primary text-xs py-1.5 px-3 flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500"
+                      className="reservation-action reservation-action-complete"
                     >
-                      <CheckCircle className="w-3.5 h-3.5" />
+                      <CheckCircle className="reservation-action-icon" />
                       <span>Complete Table</span>
                     </button>
                   )}
@@ -265,9 +264,9 @@ export const AdminReservationsPage: React.FC = () => {
                   {res.status !== 'CANCELLED' && res.status !== 'COMPLETED' && (
                     <button
                       onClick={() => handleStatusChange(res.id, 'CANCELLED')}
-                      className="btn-secondary text-xs py-1.5 px-3 text-rose-400 border-rose-500/30 hover:bg-rose-500/10 flex items-center gap-1"
+                      className="reservation-action reservation-action-cancel"
                     >
-                      <XCircle className="w-3.5 h-3.5" />
+                      <XCircle className="reservation-action-icon" />
                       <span>Cancel</span>
                     </button>
                   )}
