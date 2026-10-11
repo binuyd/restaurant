@@ -81,12 +81,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
   return (
     <div className="drawer-overlay cart-drawer">
-      <div className="drawer-content flex flex-col h-full max-w-md w-full">
+      <div className="drawer-content">
         {/* Drawer Header */}
         <div className="drawer-header">
-          <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-amber-400" />
-            <h2 className="text-xl font-bold text-slate-100">Your Dining Order</h2>
+          <div className="drawer-title">
+            <ShoppingBag className="drawer-title-icon" />
+            <div>
+              <h2>Your Dining Order</h2>
+              <span>{cart.length} {cart.length === 1 ? 'dish' : 'dishes'} selected</span>
+            </div>
           </div>
           <button onClick={onClose} className="drawer-close-btn">
             <X className="w-5 h-5" />
@@ -94,77 +97,66 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         </div>
 
         {/* Drawer Body */}
-        <div className="drawer-body flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="drawer-body">
           {error && (
-            <div className="error-banner flex items-center gap-2 text-xs">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <div className="cart-error">
+              <AlertCircle className="cart-message-icon" />
               <span>{error}</span>
             </div>
           )}
 
           {cart.length === 0 ? (
-            <div className="empty-cart-state py-12 text-center">
-              <ShoppingBag className="w-16 h-16 text-slate-600 mb-4 mx-auto" />
-              <p className="text-slate-300 font-medium">Your cart is empty</p>
+            <div className="cart-empty">
+              <ShoppingBag className="cart-empty-icon" />
+              <h3>Your cart is empty</h3>
+              <p>Add a dish from the menu to begin your order.</p>
             </div>
           ) : (
             <>
               {/* Order Mode Switcher */}
-              <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-3">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
+              <div className="order-type-section">
+                <span className="section-kicker">
                   Service / Dining Mode
                 </span>
-                <div className="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-slate-950 border border-slate-800 text-xs">
+                <div className="order-type-buttons">
                   <button
                     type="button"
                     onClick={() => setOrderType('DINE_IN')}
-                    className={`py-2 px-1 rounded-md font-semibold flex flex-col items-center gap-1 transition-all ${
-                      orderType === 'DINE_IN'
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                    className={`order-type-btn ${orderType === 'DINE_IN' ? 'selected' : ''}`}
                   >
-                    <Utensils className="w-3.5 h-3.5" />
+                    <Utensils className="order-type-icon" />
                     <span>Dine-In</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setOrderType('TAKEAWAY')}
-                    className={`py-2 px-1 rounded-md font-semibold flex flex-col items-center gap-1 transition-all ${
-                      orderType === 'TAKEAWAY'
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                    className={`order-type-btn ${orderType === 'TAKEAWAY' ? 'selected' : ''}`}
                   >
-                    <PackageCheck className="w-3.5 h-3.5" />
+                    <PackageCheck className="order-type-icon" />
                     <span>Takeaway</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setOrderType('DELIVERY')}
-                    className={`py-2 px-1 rounded-md font-semibold flex flex-col items-center gap-1 transition-all ${
-                      orderType === 'DELIVERY'
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                    className={`order-type-btn ${orderType === 'DELIVERY' ? 'selected' : ''}`}
                   >
-                    <Bike className="w-3.5 h-3.5" />
+                    <Bike className="order-type-icon" />
                     <span>Delivery</span>
                   </button>
                 </div>
 
                 {/* Conditional Fields based on Order Type */}
                 {orderType === 'DINE_IN' && (
-                  <div>
-                    <label className="text-[11px] font-semibold text-slate-400 block mb-1">
+                  <div className="order-fields">
+                    <label>
                       Select Table Number:
                     </label>
                     <select
                       value={tableNumber}
                       onChange={(e) => setTableNumber(e.target.value)}
-                      className="input-field text-xs bg-slate-900 py-1.5"
+                      className="cart-input"
                     >
                       {Array.from({ length: 20 }, (_, i) => `Table ${i + 1}`).map((tbl) => (
                         <option key={tbl} value={tbl}>
@@ -176,8 +168,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 )}
 
                 {orderType === 'TAKEAWAY' && (
-                  <div>
-                    <label className="text-[11px] font-semibold text-slate-400 block mb-1">
+                  <div className="order-fields">
+                    <label>
                       Contact Phone for Pickup:
                     </label>
                     <input
@@ -186,15 +178,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       placeholder="+1 (555) 019-2834"
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="input-field text-xs py-1.5"
+                      className="cart-input"
                     />
                   </div>
                 )}
 
                 {orderType === 'DELIVERY' && (
-                  <div className="space-y-2">
+                  <div className="order-fields">
                     <div>
-                      <label className="text-[11px] font-semibold text-slate-400 block mb-1">
+                      <label>
                         Delivery Street Address:
                       </label>
                       <input
@@ -203,11 +195,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         placeholder="e.g. 742 Evergreen Terrace, Apt 3B"
                         value={deliveryAddress}
                         onChange={(e) => setDeliveryAddress(e.target.value)}
-                        className="input-field text-xs py-1.5"
+                        className="cart-input"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-semibold text-slate-400 block mb-1">
+                      <label>
                         Delivery Contact Phone:
                       </label>
                       <input
@@ -216,15 +208,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         placeholder="+1 (555) 234-5678"
                         value={customerPhone}
                         onChange={(e) => setCustomerPhone(e.target.value)}
-                        className="input-field text-xs py-1.5"
+                        className="cart-input"
                       />
                     </div>
                   </div>
                 )}
 
                 {/* Special Kitchen Notes */}
-                <div>
-                  <label className="text-[11px] font-semibold text-slate-400 block mb-1">
+                <div className="order-fields">
+                  <label>
                     Special Kitchen Instructions / Allergies:
                   </label>
                   <input
@@ -232,14 +224,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     placeholder="e.g. Extra spicy, dressing on side, no peanuts..."
                     value={specialNotes}
                     onChange={(e) => setSpecialNotes(e.target.value)}
-                    className="input-field text-xs py-1.5"
+                    className="cart-input"
                   />
                 </div>
               </div>
 
               {/* Items List */}
-              <div className="space-y-3">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
+              <div className="cart-items-section">
+                <span className="section-kicker">
                   Ordered Dishes ({cart.length})
                 </span>
                 {cart.map((item) => (
@@ -250,30 +242,30 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       className="cart-item-img"
                     />
 
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm">{item.menuItem.name}</h4>
-                      <p className="text-xs text-amber-400 font-medium mt-0.5">
+                    <div className="cart-item-details">
+                      <h4>{item.menuItem.name}</h4>
+                      <p className="cart-item-price">
                         ${item.menuItem.price.toFixed(2)} each
                       </p>
 
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="qty-control small">
+                      <div className="item-qty-row">
+                        <div className="qty-control-small">
                           <button
                             onClick={() => updateQuantity(item.menuItem.id, item.quantity - 1)}
-                            className="qty-btn"
+                            aria-label={`Decrease ${item.menuItem.name} quantity`}
                           >
-                            <Minus className="w-3 h-3" />
+                            <Minus className="qty-icon" />
                           </button>
-                          <span className="qty-number">{item.quantity}</span>
+                          <span>{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.menuItem.id, item.quantity + 1)}
-                            className="qty-btn"
+                            aria-label={`Increase ${item.menuItem.name} quantity`}
                           >
-                            <Plus className="w-3 h-3" />
+                            <Plus className="qty-icon" />
                           </button>
                         </div>
 
-                        <span className="font-bold text-slate-100 text-sm">
+                        <span className="item-total">
                           ${(item.menuItem.price * item.quantity).toFixed(2)}
                         </span>
                       </div>
@@ -281,7 +273,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                     <button
                       onClick={() => removeFromCart(item.menuItem.id)}
-                      className="text-slate-400 hover:text-rose-400 p-1"
+                      className="remove-item-btn"
                       title="Remove item"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -295,27 +287,27 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Drawer Footer */}
         {cart.length > 0 && (
-          <div className="drawer-footer border-t border-slate-800 p-4 bg-slate-950/80">
+          <div className="drawer-footer">
             {/* Payment Method Notice (No payment system needed) */}
-            <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 flex items-center gap-2 mb-3">
-              <Banknote className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+            <div className="payment-notice">
+              <Banknote className="cart-message-icon" />
               <span>
                 <strong>Payment: In-Person / Cash / At Counter</strong> (No online card required. Order confirms immediately).
               </span>
             </div>
 
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-slate-400 text-sm">Estimated Total:</span>
-              <span className="text-2xl font-bold text-amber-400">${totalCartAmount.toFixed(2)}</span>
+            <div className="subtotal-row">
+              <span>Estimated Total:</span>
+              <span>${totalCartAmount.toFixed(2)}</span>
             </div>
 
             <button
               onClick={handleCheckout}
               disabled={loading}
-              className="w-full btn-primary py-3.5 text-base font-semibold flex items-center justify-center gap-2"
+              className="checkout-button"
             >
               <span>{loading ? 'Submitting Order...' : isAuthenticated ? 'Place Order (Pay In-Person)' : 'Sign In to Confirm Order'}</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="checkout-icon" />
             </button>
           </div>
         )}
